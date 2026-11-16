@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)http://localhost:8080/global-environment-of-business-reflection-lab -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Environment of Business — Reflection Lab</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Global Environment of Business — Reflection Lab_files/css2" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       THE GLOBAL ECOSYSTEM PALETTE & DESIGN TOKENS
+       Baby Blue, Sage, Emerald Green, Light Brown, Sand, Bone, Greenery
+       ========================================================================== */
+    :root {
+      --bone-light: #FBF9F5;
+      --bone-base: #F5F1EA;
+      --bone-dark: #ECE5DA;
+      --sand-light: #E4DCCF;
+      --sand-base: #D5C7B5;
+      --sand-dark: #BCAB94;
+
+      --baby-blue-soft: #E3F1F7;
+      --baby-blue: #A2D2DF;
+      --baby-blue-deep: #70A9BA;
+
+      --sage-light: #CED9C2;
+      --sage: #9CAF88;
+      --sage-dark: #768B62;
+
+      --emerald-light: #4D8B6F;
+      --emerald: #2D6A4F;
+      --emerald-dark: #1B4332;
+      --emerald-deep: #0D281E;
+
+      --light-brown: #8D6E63;
+      --earth-brown: #6D4C41;
+      --warm-taupe: #A0826C;
+
+      --text-primary: #1B2E24;
+      --text-secondary: #4A5B52;
+      --text-muted: #7A8B82;
+
+      --card-bg: rgba(251, 249, 245, 0.95);
+      --card-border: rgba(156, 175, 136, 0.45);
+      --glass-blur: blur(14px);
+      --shadow-sm: 0 4px 14px rgba(27, 46, 36, 0.08);
+      --shadow-md: 0 10px 28px rgba(27, 46, 36, 0.12);
+      --shadow-lg: 0 20px 48px rgba(27, 46, 36, 0.16);
+
+      --font-display: 'Cinzel', serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bone-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Background */
+    .botanical-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+      background: 
+        radial-gradient(circle at 10% 15%, rgba(162, 210, 223, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(156, 175, 136, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(213, 199, 181, 0.4) 0%, transparent 35%),
+        radial-gradient(circle at 20% 85%, rgba(45, 106, 79, 0.15) 0%, transparent 40%);
+    }
+
+    .parchment-pattern {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(var(--sand-dark) 0.65px, transparent 0.65px);
+      background-size: 28px 28px;
+      opacity: 0.18;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .app-header {
+      position: relative;
+      z-index: 30;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--sand-light);
+      background: rgba(251, 249, 245, 0.92);
+      backdrop-filter: var(--glass-blur);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bone-light);
+      box-shadow: 0 4px 12px rgba(27, 67, 50, 0.25);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--emerald-dark);
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Rank Pill */
+    .rank-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bone-light);
+      border: 1.5px solid var(--emerald);
+      padding: 5px 14px;
+      border-radius: 30px;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .rank-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: #FFF;
+    }
+
+    .rank-badge {
+      font-size: 1.15rem;
+    }
+
+    .rank-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .rank-title {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--emerald-dark);
+    }
+
+    .rank-points {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+    }
+
+    .btn-emerald {
+      background: var(--emerald);
+      color: var(--bone-light);
+      box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25);
+    }
+
+    .btn-emerald:hover {
+      background: var(--emerald-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(45, 106, 79, 0.35);
+    }
+
+    .btn-journal {
+      background: var(--baby-blue-soft);
+      border-color: var(--baby-blue-deep);
+      color: var(--emerald-dark);
+    }
+
+    .btn-journal:hover {
+      background: var(--baby-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-sound {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: 50%;
+      background: var(--bone-light);
+      border: 1px solid var(--sand-light);
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       MAIN ARENA: HERO + GLOBE + QUICK ACTION HUD
+       ========================================================================== */
+    .main-stage {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 48px; /* Generous top margin below banner */
+      padding: 16px 20px 36px;
+      gap: 8px;
+      width: 100%;
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Curved Title Header */
+    .curved-title-container {
+      width: 100%;
+      max-width: 760px;
+      margin-top: 60px; /* Significantly larger margin above the arch header */
+      margin-bottom: -82px; /* Minimized margin below header arch, snugly connecting with the arena */
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .curved-title-svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .curved-title-text {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      fill: var(--emerald-dark);
+      text-transform: uppercase;
+      filter: drop-shadow(0 2px 8px rgba(27, 67, 50, 0.15));
+    }
+
+    /* 3-COLUMN ARENA GRID: LEFT BUTTONS | CENTER GLOBE | RIGHT CARDS */
+    .interactive-arena-grid {
+      display: grid;
+      grid-template-columns: 290px 1fr 290px;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .arena-left-flank, .arena-right-flank {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 20;
+    }
+
+    .flank-title {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--emerald-dark);
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid var(--sand-base);
+    }
+
+    .arena-center-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    /* Left Vertical Stack */
+    .arena-left-flank .primary-game-hud {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      width: 100%;
+      margin: 0;
+    }
+
+    .arena-left-flank .hud-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: 2px solid transparent;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+    }
+
+    /* Right Vertical Stack */
+    .arena-right-flank .game-actions-bar.vertical-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .arena-right-flank .game-trigger-card {
+      width: 100%;
+      padding: 14px 16px;
+    }
+
+    @media (max-width: 992px) {
+      .interactive-arena-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .arena-left-flank, .arena-right-flank {
+        max-width: 380px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    .hud-btn-play {
+      background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+      color: #FFF;
+      box-shadow: 0 4px 18px rgba(27, 67, 50, 0.35);
+      animation: gentlePulse 2.5s infinite;
+    }
+
+    .hud-btn-play:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(27, 67, 50, 0.45);
+      background: #0D281E;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { box-shadow: 0 4px 18px rgba(27, 67, 50, 0.35); }
+      50% { box-shadow: 0 6px 26px rgba(45, 106, 79, 0.55); }
+    }
+
+    .hud-btn-sort {
+      background: var(--baby-blue-soft);
+      border-color: var(--baby-blue-deep);
+      color: var(--emerald-dark);
+    }
+
+    .hud-btn-sort:hover {
+      background: var(--baby-blue);
+      transform: translateY(-2px);
+    }
+
+    .hud-btn-japan {
+      background: #FFF5F0;
+      border-color: #E76F51;
+      color: #9C3317;
+    }
+
+    .hud-btn-japan:hover {
+      background: #E76F51;
+      color: #FFF;
+      transform: translateY(-2px);
+    }
+
+    /* Hint Pill */
+    .hint-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--sand-base);
+      padding: 5px 16px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hint-pill span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* ==========================================================================
+       3D GLOBE ARENA
+       ========================================================================== */
+    .globe-viewport-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+    }
+
+    .globe-orbit-ring {
+      position: absolute;
+      width: 108%;
+      height: 108%;
+      border-radius: 50%;
+      border: 1px dashed var(--sand-base);
+      pointer-events: none;
+      animation: slowRotate 120s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes slowRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .globe-canvas-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    canvas#globeCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+      box-shadow: 
+        0 20px 50px -10px rgba(27, 67, 50, 0.24),
+        0 8px 24px rgba(162, 210, 223, 0.35),
+        inset 0 -18px 36px rgba(27, 67, 50, 0.2);
+    }
+
+    /* Floating Controls */
+    .globe-controls-floating {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 15;
+    }
+
+    .globe-ctrl-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bone-light);
+      border: 1px solid var(--sand-base);
+      color: var(--emerald-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+
+    .globe-ctrl-btn:hover {
+      background: var(--emerald);
+      color: var(--bone-light);
+      border-color: var(--emerald);
+      transform: scale(1.08);
+    }
+
+    /* Tooltip */
+    .country-tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: rgba(13, 40, 30, 0.95);
+      color: var(--bone-light);
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow-md);
+      z-index: 50;
+      opacity: 0;
+      transform: translate(-50%, -130%);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+      border: 1px solid var(--baby-blue);
+    }
+
+    .country-tooltip.active {
+      opacity: 1;
+      transform: translate(-50%, -140%);
+    }
+
+    .country-tooltip .tt-country {
+      font-weight: 800;
+      color: var(--baby-blue);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .country-tooltip .tt-prompt {
+      font-size: 0.72rem;
+      color: #FFF;
+      background: var(--emerald);
+      padding: 2px 6px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       COUNTRY DOCK & GAME CARDS
+       ========================================================================== */
+    .country-dock-title {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .country-pills-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      max-width: 100%;
+      padding: 6px 4px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--sand-base) transparent;
+    }
+
+    .country-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--bone-light);
+      border: 1.5px solid var(--sand-base);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition-smooth);
+    }
+
+    .country-pill:hover,
+    .country-pill.active {
+      background: var(--emerald);
+      color: var(--bone-light);
+      border-color: var(--emerald-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .country-pill.highlight-japan {
+      background: #FFF7F2;
+      border-color: #E76F51;
+      color: #9C3317;
+      font-weight: 800;
+    }
+
+    .country-pill.highlight-japan:hover {
+      background: #E76F51;
+      color: #FFF;
+    }
+
+    /* Bottom Game Feature Cards */
+    .game-actions-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .game-trigger-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--sand-base);
+      border-radius: 18px;
+      padding: 14px 18px;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .game-trigger-card:hover {
+      border-color: var(--emerald);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      background: #FFF;
+    }
+
+    .game-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: var(--baby-blue-soft);
+      color: var(--emerald-dark);
+      flex-shrink: 0;
+    }
+
+    .game-trigger-card:nth-child(2) .game-icon-box {
+      background: #EAF4EE;
+      color: var(--emerald);
+    }
+
+    .game-trigger-card:nth-child(3) .game-icon-box {
+      background: #FFF3E8;
+      color: #C0472A;
+    }
+
+    .game-trigger-meta h4 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--emerald-dark);
+      margin-bottom: 2px;
+    }
+
+    .game-trigger-meta p {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       MODALS
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 40, 30, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-window {
+      background: var(--bone-light);
+      border: 1px solid var(--sand-base);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95) translateY(15px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open .modal-window {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--sand-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bone-base);
+    }
+
+    .modal-header-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-close-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bone-light);
+      border: 1px solid var(--sand-base);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .modal-close-btn:hover {
+      background: #FEECEB;
+      color: #D32F2F;
+      border-color: #FFCDD2;
+    }
+
+    .modal-body {
+      padding: 22px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* PLAY CHALLENGE FIRST IN COUNTRY MODAL! */
+    .country-quiz-box {
+      background: linear-gradient(135deg, #F0F7F3 0%, #E3EFE7 100%);
+      border: 2px solid var(--emerald);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .country-quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quiz-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-opt-btn {
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: var(--bone-light);
+      border: 1.5px solid var(--sand-base);
+      text-align: left;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .quiz-opt-btn:hover {
+      background: #FFF;
+      border-color: var(--emerald);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-opt-btn.correct {
+      background: #D8F3DC;
+      border-color: #2D6A4F;
+      color: #1B4332;
+      font-weight: 700;
+    }
+
+    .quiz-opt-btn.incorrect {
+      background: #FFE3E0;
+      border-color: #D90429;
+      color: #720026;
+    }
+
+    /* Context Spectrum Meter */
+    .context-meter-box {
+      background: var(--bone-base);
+      border: 1px solid var(--sand-light);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+
+    .context-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .context-track {
+      height: 12px;
+      border-radius: 6px;
+      background: linear-gradient(to right, #8ecae6 0%, #9caf88 50%, #2d6a4f 100%);
+      position: relative;
+    }
+
+    .context-marker {
+      position: absolute;
+      top: -4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bone-light);
+      border: 3px solid var(--emerald-dark);
+      transform: translateX(-50%);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 680px) {
+      .dossier-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dossier-card {
+      background: var(--bone-light);
+      border: 1px solid var(--sand-light);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dossier-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--sand-light);
+      padding-bottom: 8px;
+    }
+
+    .dossier-card-header h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .dossier-card p {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    /* MATCHING GAME */
+    .game-status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: var(--bone-base);
+      border: 1px solid var(--sand-light);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .match-columns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 680px) {
+      .match-columns-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .match-col h4 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .match-card {
+      background: var(--bone-light);
+      border: 1.5px solid var(--sand-base);
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+
+    .match-card:hover {
+      border-color: var(--emerald);
+      transform: translateY(-2px);
+      background: #FFF;
+    }
+
+    .match-card.selected {
+      background: var(--baby-blue-soft);
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 2px var(--emerald);
+    }
+
+    .match-card.matched {
+      background: #E8F5E9;
+      border-color: #4CAF50;
+      color: #2E7D32;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .match-card.shake {
+      animation: shakeAnim 0.4s ease;
+      background: #FFEBEE;
+      border-color: #E57373;
+    }
+
+    @keyframes shakeAnim {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* FIELD JOURNAL */
+    .journal-entry-card {
+      background: var(--bone-light);
+      border: 1.5px solid var(--sand-base);
+      border-radius: 18px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .journal-entry-card.locked {
+      background: #F3EFE9;
+      border-style: dashed;
+      opacity: 0.7;
+    }
+
+    .journal-block {
+      background: var(--bone-base);
+      border-left: 3px solid var(--emerald);
+      padding: 10px 14px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .journal-block strong {
+      color: var(--emerald-dark);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: #FFF; color: #000; }
+      .app-header, .main-stage, .modal-overlay:not(#learningStoryModal) { display: none !important; }
+      #learningStoryModal { position: static !important; opacity: 1 !important; pointer-events: auto !important; background: transparent !important; }
+      .modal-window { box-shadow: none !important; border: none !important; max-width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Botanicals -->
+  <div class="botanical-bg"></div>
+  <div class="parchment-pattern"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand-group">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">Global Environment of Business</h1>
+        <p class="brand-subtitle">Reflection Lab</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- Live XP & Rank Pill -->
+      <div class="rank-pill" id="rankPill" onclick="openModal('leaderboardModal')" title="View Global Rank &amp; Achievements">
+        <span class="rank-badge" id="rankBadgeIcon">🏆</span>
+        <div class="rank-info">
+          <span class="rank-title" id="rankTitleDisplay">Global Leaderboard</span>
+          <span class="rank-points"><span id="xpPointsDisplay">1350</span> XP</span>
+        </div>
+      </div>
+
+      <!-- Learning Story Button -->
+      <button class="btn btn-emerald" id="openStoryBtn" onclick="openModal('learningStoryModal')">
+        <span>📖</span>
+        <span>Learning Story (6 Pillars)</span>
+      </button>
+
+      <!-- Sound Toggle -->
+      <button class="btn btn-sound" id="soundToggleBtn" onclick="toggleAudio()" title="Toggle Sound">
+        <svg id="soundOnIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Stage -->
+  <main class="main-stage">
+    
+    <!-- Curved Lettering surrounding Globe -->
+    <div class="curved-title-container">
+      <svg viewBox="0 0 820 125" class="curved-title-svg">
+        <defs>
+          <path id="globeTextArch" d="M 40,118 A 370,170 0 0,1 780,118" fill="transparent"></path>
+        </defs>
+        <text class="curved-title-text">
+          <textpath href="#globeTextArch" startOffset="50%" text-anchor="middle">
+            GLOBAL ENVIRONMENT OF BUSINESS
+          </textpath>
+        </text>
+      </svg>
+    </div>
+
+    <!-- 3-COLUMN ARENA: LEFT HUD (Buttons) | CENTER (Globe) | RIGHT HUD (Game Cards) -->
+    <div class="interactive-arena-grid">
+      
+      <!-- LEFT FLANK: Vertical Action Stack -->
+      <aside class="arena-left-flank">
+        <div class="flank-title">⚡ Quick Missions</div>
+        <div class="primary-game-hud">
+          <button class="hud-btn hud-btn-play" id="heroPlayMatchBtn" onclick="initMatchGame()">
+            <span style="font-size:1.3rem;">🎮</span>
+            <span>PLAY: Match Facts Game (+100 XP)</span>
+          </button>
+
+          <button class="hud-btn hud-btn-sort" id="heroPlaySortBtn" onclick="initClassifierGame()">
+            <span style="font-size:1.3rem;">⚖️</span>
+            <span>PLAY: Context Classifier (+75 XP)</span>
+          </button>
+
+          <button class="hud-btn hud-btn-japan" onclick="focusCountry('Japan')">
+            <span style="font-size:1.3rem;">🇯🇵</span>
+            <span>CHALLENGE: Japan Mission (+75 XP)</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- CENTER: Interactive 3D World Globe -->
+      <div class="arena-center-stage">
+        <!-- Hint Pill -->
+        <div class="hint-pill">
+          <span class="dot"></span>
+          <span>Tap any country directly on the 3D globe to play!</span>
+        </div>
+
+        <div class="globe-viewport-wrapper">
+          <div class="globe-orbit-ring"></div>
+          
+          <div class="globe-canvas-container" id="globeContainer">
+            <canvas id="globeCanvas" width="950" height="950"></canvas>
+          </div>
+
+          <!-- Controls -->
+          <div class="globe-controls-floating">
+            <button class="globe-ctrl-btn" id="zoomInBtn" title="Zoom In">+</button>
+            <button class="globe-ctrl-btn" id="zoomOutBtn" title="Zoom Out">−</button>
+            <button class="globe-ctrl-btn" id="resetGlobeBtn" title="Reset Rotation">⟲</button>
+            <button class="globe-ctrl-btn" id="spinToggleBtn" title="Toggle Auto-Spin">▶</button>
+          </div>
+
+          <!-- Tooltip -->
+          <div class="country-tooltip" id="countryTooltip" style="left: 311px; top: 10.75px;">
+            <span class="tt-country" id="ttCountry">🇬🇧 United Kingdom</span>
+            <span class="tt-prompt">👉 Click to Play Challenge!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT FLANK: Vertical Game Cards Stack -->
+      <aside class="arena-right-flank">
+        <div class="flank-title">🎯 Global Challenges</div>
+        <div class="game-actions-bar vertical-stack">
+          <div class="game-trigger-card" id="openMatchGameBtn" onclick="initMatchGame()">
+            <div class="game-icon-box">🧩</div>
+            <div class="game-trigger-meta">
+              <h4>Match the Facts Game</h4>
+              <p>Pair business concepts with correct nations</p>
+            </div>
+          </div>
+
+          <div class="game-trigger-card" id="openContextGameBtn" onclick="initClassifierGame()">
+            <div class="game-icon-box">⚖️</div>
+            <div class="game-trigger-meta">
+              <h4>Context Classifier</h4>
+              <p>Sort High-Context vs Low-Context behaviors</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Country Quick-Selector Dock -->
+    <div class="country-dock-title">Select Any Nation to Play Its Cultural Mission:</div>
+    <div class="country-pills-scroll">
+      <button class="country-pill highlight-japan" onclick="focusCountry('Japan')">🇯🇵 Japan (Key Paper)</button>
+      <button class="country-pill" onclick="focusCountry('United States')">🇺🇸 United States</button>
+      <button class="country-pill" onclick="focusCountry('Germany')">🇩🇪 Germany</button>
+      <button class="country-pill" onclick="focusCountry('China')">🇨🇳 China</button>
+      <button class="country-pill" onclick="focusCountry('Brazil')">🇧🇷 Brazil</button>
+      <button class="country-pill" onclick="focusCountry('India')">🇮🇳 India</button>
+      <button class="country-pill" onclick="focusCountry('Kenya')">🇰🇪 Kenya</button>
+      <button class="country-pill" onclick="focusCountry('United Arab Emirates')">🇦🇪 UAE</button>
+      <button class="country-pill" onclick="focusCountry('United Kingdom')">🇬🇧 United Kingdom</button>
+      <button class="country-pill" onclick="focusCountry('Mexico')">🇲🇽 Mexico</button>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL 1: COUNTRY CQ MISSION & BUSINESS DOSSIER
+       ========================================================================== -->
+  <div class="modal-overlay" id="countryModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-header-meta">
+          <span style="font-size:2.2rem;" id="dossierFlag">🇯🇵</span>
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--emerald-dark);" id="dossierTitle">Japan</h3>
+            <span style="font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:10px; background:var(--baby-blue-soft); color:var(--emerald-dark);" id="dossierBadge">High-Context Relational Culture</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('countryModal')">×</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- STEP 1: PLAY THE COUNTRY CQ CHALLENGE FIRST! -->
+        <div class="country-quiz-box" id="countryQuizContainer">
+          <div class="country-quiz-header">
+            <h4 style="font-size:1.05rem; font-weight:800; color:var(--emerald-dark);" id="quizQuestionTitle">🎯 Cultural Intelligence (CQ) Challenge</h4>
+            <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:800; color:var(--emerald); background:#FFF; padding:3px 10px; border-radius:12px; border:1px solid var(--emerald);">REWARD: +75 XP</span>
+          </div>
+          <p id="quizScenario" style="font-size:0.9rem; color:var(--text-primary); line-height:1.5;">
+            Scenario loading...
+          </p>
+          <div class="quiz-options-list" id="quizOptionsList">
+            <!-- Options injected by JS -->
+          </div>
+        </div>
+
+        <!-- STEP 2: BRIEF INSIGHTFUL FACTS -->
+        <div class="context-meter-box">
+          <div class="context-labels">
+            <span>Low Context (Direct)</span>
+            <span>Balanced</span>
+            <span>High Context (Implicit)</span>
+          </div>
+          <div class="context-track">
+            <div class="context-marker" id="contextMarker" style="left: 88%;"></div>
+          </div>
+          <div class="context-verdict" id="contextVerdict" style="margin-top:8px; font-size:0.8rem; text-align:center; font-style:italic;">
+            Loading context analysis...
+          </div>
+        </div>
+
+        <div class="dossier-grid">
+          <div class="dossier-card">
+            <div class="dossier-card-header">
+              <span>🎎</span>
+              <h4>Sociocultural Forces &amp; Communication</h4>
+            </div>
+            <p id="dossierSociocultural"></p>
+            <p id="dossierEtiquette"></p>
+          </div>
+
+          <div class="dossier-card">
+            <div class="dossier-card-header">
+              <span>⚖️</span>
+              <h4>Political &amp; Legal Environment</h4>
+            </div>
+            <p id="dossierLegal"></p>
+            <p id="dossierRegulatory"></p>
+          </div>
+
+          <div class="dossier-card" style="grid-column: 1 / -1;">
+            <div class="dossier-card-header">
+              <span>♟️</span>
+              <h4>International Strategy &amp; Market Entry</h4>
+            </div>
+            <p id="dossierStrategy"></p>
+            <p id="dossierDistribution"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: MATCH THE GLOBAL FACTS GAME
+       ========================================================================== -->
+  <div class="modal-overlay" id="matchGameModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-header-meta">
+          <span style="font-size:1.8rem;">🧩</span>
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--emerald-dark);">Global Match</h3>
+            <span style="font-size:0.72rem; font-weight:800; color:var(--emerald);">Match Business Facts to Nations</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('matchGameModal')">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="game-status-bar">
+          <div>Round: <span id="matchRound">1</span>/3</div>
+          <div style="color:var(--emerald);">Score: <span id="matchScore">0</span> XP</div>
+          <div>Remaining: <span id="matchRemaining">4</span> pairs</div>
+        </div>
+
+        <div style="font-size:0.82rem; color:var(--text-secondary); text-align:center;">
+          👉 <strong>How to play:</strong> Click a nation card on the left, then click its corresponding business phenomenon on the right!
+        </div>
+
+        <div class="match-columns-grid">
+          <div class="match-col">
+            <h4>Select Nation:</h4>
+            <div id="countryMatchCol" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+
+          <div class="match-col">
+            <h4>Select Business Phenomenon / Fact:</h4>
+            <div id="factMatchCol" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+        </div>
+
+        <div id="matchFeedback" style="text-align:center; font-size:0.92rem; font-weight:800; min-height:26px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: CULTURAL CONTEXT CLASSIFIER
+       ========================================================================== -->
+  <div class="modal-overlay" id="contextClassifierModal">
+    <div class="modal-window" style="max-width: 640px;">
+      <div class="modal-header">
+        <div class="modal-header-meta">
+          <span style="font-size:1.8rem;">⚖️</span>
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--emerald-dark);">Cultural Context Classifier</h3>
+            <span style="font-size:0.72rem; font-weight:800; color:var(--emerald);">Edward T. Hall Communication Spectrum</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('contextClassifierModal')">×</button>
+      </div>
+
+      <div class="modal-body" style="text-align:center; gap:18px;">
+        <p style="font-size:0.86rem; color:var(--text-secondary);">
+          Sort each cross-border corporate behavior into <strong>Low-Context</strong> (Explicit, Rule-governed) or <strong>High-Context</strong> (Implicit, Relational).
+        </p>
+
+        <div id="classifierCard" style="background:var(--bone-base); border:2px dashed var(--sand-base); border-radius:18px; padding:22px; min-height:110px; display:flex; align-items:center; justify-content:center; font-size:1.05rem; font-weight:700; color:var(--emerald-dark); line-height:1.5;">
+          Loading prompt...
+        </div>
+
+        <div style="display: flex; gap: 14px; justify-content: center;">
+          <button class="btn btn-secondary" style="flex:1; padding:14px; font-size:0.9rem;" onclick="classifyPrompt('low')">
+            📘 Low-Context<br><small style="font-size:0.72rem; font-weight:normal;">Direct / Detailed Contracts</small>
+          </button>
+          <button class="btn btn-emerald" style="flex:1; padding:14px; font-size:0.9rem;" onclick="classifyPrompt('high')">
+            🌿 High-Context<br><small style="font-size:0.72rem; font-weight:normal;">Relational / Nuanced Signals</small>
+          </button>
+        </div>
+
+        <div id="classifierFeedback" style="font-size:0.9rem; font-weight:800; min-height:24px;"></div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- ==========================================================================
+       MODAL 5: LEADERBOARD
+       ========================================================================== -->
+  <div class="modal-overlay" id="leaderboardModal">
+    <div class="modal-window" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-header-meta">
+          <span style="font-size:1.8rem;">🏆</span>
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--emerald-dark);">Global Leaderboard</h3>
+            <span style="font-size:0.72rem; font-weight:700; color:var(--emerald);">Executive Cohort Rankings</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('leaderboardModal')">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-radius:14px; background:var(--bone-base); border:1px solid var(--sand-light);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="width:28px; height:28px; border-radius:50%; background:var(--emerald-dark); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.8rem;">1</span>
+              <div>
+                <strong>Aiko Tanaka</strong>
+                <div style="font-size:0.72rem; color:var(--text-muted);">Tokyo Hub // Global Strategist</div>
+              </div>
+            </div>
+            <span style="font-family:var(--font-mono); font-weight:700; color:var(--emerald);">1,920 XP</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-radius:14px; background:var(--baby-blue-soft); border:1.5px solid var(--emerald); font-weight:700;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="width:28px; height:28px; border-radius:50%; background:var(--emerald); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.8rem;">2</span>
+              <div>
+                <strong id="lbPlayerName">You (Consultant Strategist)</strong>
+                <div style="font-size:0.72rem; color:var(--emerald);" id="lbPlayerRank">Multinational Strategist</div>
+              </div>
+            </div>
+            <span style="font-family:var(--font-mono); font-weight:800; color:var(--emerald);" id="lbPlayerXP">1350 XP</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-radius:14px; background:var(--bone-base); border:1px solid var(--sand-light);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="width:28px; height:28px; border-radius:50%; background:#8D6E63; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.8rem;">3</span>
+              <div>
+                <strong>Mateo Silva</strong>
+                <div style="font-size:0.72rem; color:var(--text-muted);">São Paulo Hub // Trade Specialist</div>
+              </div>
+            </div>
+            <span style="font-family:var(--font-mono); font-weight:700; color:var(--text-secondary);">840 XP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 6: DIGITAL LEARNING STORY (6 PILLARS) REPORT
+       ========================================================================== -->
+  <div class="modal-overlay" id="learningStoryModal">
+    <div class="modal-window" style="max-width: 980px;">
+      <div class="modal-header" style="background:var(--emerald-deep); color:#FFF;">
+        <div class="modal-header-meta">
+          <span style="font-size:1.8rem;">📖</span>
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:#FFF;">Digital Learning Story</h3>
+            <span style="font-size:0.72rem; font-weight:700; color:var(--baby-blue);">Global Business Consultant Portfolio // Capstone Digital Learning Story</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="modal-close-btn" style="background:rgba(255,255,255,0.1); color:#FFF; border:none;" onclick="closeModal('learningStoryModal')">×</button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 24px 30px;">
+        <div style="background:var(--bone-base); border:1px solid var(--sand-base); border-radius:14px; padding:18px 22px; margin-bottom:20px;">
+          <div style="font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--emerald);">Executive Context &amp; Dual Capstone Consulting Guide</div>
+          <h2 style="font-family:var(--font-serif); font-size:1.55rem; color:var(--emerald-dark); margin:6px 0 10px 0; line-height:1.3;">
+            A Global Business Consultant’s Guide to Navigating Japanese Culture &amp; Entering the Japanese Market
+          </h2>
+          <div style="font-size:0.83rem; color:var(--text-secondary); line-height:1.65;">
+            <strong>Role:</strong> Global Business Consultant &amp; Cross-Border Investment Banking Analyst<br>
+            <strong>Focus:</strong> Cross-Border Market Entry, Cultural Agility &amp; Regulatory Due Diligence<br>
+            <strong>Dual Capstone Reports:</strong> 
+            <span style="display:inline-block; margin-top:2px;">
+              • <em>Report 1 (Cultural Environment):</em> Recommendations for Navigating Japanese Culture (October 2026)<br>
+              • <em>Report 2 (Legal &amp; Regulatory Environment):</em> Recommendations for Entering the Japanese Market (October 2026)
+            </span><br>
+            <strong>Analytical Lens:</strong> Cross-Border Investment Banking (Goldman Sachs, JPMorgan, Bank of America Securities in Japan; <em>The Wall Street Journal</em>, 2026; <em>OECD</em>, 2026)
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-top:12px; line-height:1.55; border-top:1px solid var(--sand-light); padding-top:10px;">
+            <em>"These reports provide American business professionals with cultural insights, regulatory due diligence roadmaps, and practical strategies for operating lawfully and successfully in Japan. Applying Hall’s Cultural Framework, Trompenaars’ Cultural Dimensions, and Japan's statutory legal framework (FSA, FIEA, FEFTA, Civil Code, and ADR), the analysis demonstrates that cultural agility and legal compliance directly govern credibility, partnership strength, deal execution, and long-term business outcomes."</em>
+          </p>
+        </div>
+
+        <!-- The 4 Guiding Pillars -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; margin-bottom:28px;">
+          <div style="background:var(--baby-blue-soft); padding:14px; border-radius:12px; border-left:3.5px solid var(--baby-blue-deep);">
+            <strong style="font-size:0.72rem; text-transform:uppercase; color:var(--emerald-dark); display:block; letter-spacing:0.04em;">I. What I Discovered</strong>
+            <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:4px; line-height:1.5;">Hall's High-Context communication, Trompenaars' 7 Dimensions, and Japan's strict statutory architecture (FSA, FIEA, FEFTA, Civil Code good faith, and ADR).</p>
+          </div>
+          <div style="background:#EAF4EE; padding:14px; border-radius:12px; border-left:3.5px solid var(--emerald);">
+            <strong style="font-size:0.72rem; text-transform:uppercase; color:var(--emerald-dark); display:block; letter-spacing:0.04em;">II. Where I Applied It</strong>
+            <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:4px; line-height:1.5;">Across dual consulting reports analyzing U.S. investment banks expanding into Tokyo, and in my actual investment banking recruitment season.</p>
+          </div>
+          <div style="background:#FFF5F0; padding:14px; border-radius:12px; border-left:3.5px solid #E76F51;">
+            <strong style="font-size:0.72rem; text-transform:uppercase; color:#9C3317; display:block; letter-spacing:0.04em;">III. How I Developed</strong>
+            <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:4px; line-height:1.5;">Overcame American low-context speed and universalist assumptions; mastered diffuse relationship-building, contemplative silence (respectful contemplative pause), consensus (informal consensus-building), and regulatory due diligence.</p>
+          </div>
+          <div style="background:var(--bone-base); padding:14px; border-radius:12px; border-left:3.5px solid var(--light-brown);">
+            <strong style="font-size:0.72rem; text-transform:uppercase; color:var(--light-brown); display:block; letter-spacing:0.04em;">IV. Where I Am Going</strong>
+            <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:4px; line-height:1.5;">Implementing what I learned across IB recruitment interviews, networking chats, and firm webinars, while preparing to apply cultural diplomacy and cross-border regulatory strategy to future investment banking deals.</p>
+          </div>
+        </div>
+
+        <!-- 6 Required Syllabus Sections -->
+        <div style="display:flex; flex-direction:column; gap:26px;">
+          
+          <!-- SECTION I -->
+          <section style="border-left:3px solid var(--emerald); padding-left:18px;">
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--emerald-dark); margin-bottom:6px;">My Story</h4>
+            <p style="font-size:0.88rem; line-height:1.7; color:var(--text-secondary);">
+              My learning story centers on a transformative realization: business professionals cannot assume that domestic practices, communication styles, legal norms, or business frameworks can be seamlessly transferred across international markets. As an aspiring global investment banking professional, I examined cross-border expansion through the lens of investment banking in Japan, a particularly relevant case given Bank of America’s growing focus on the Asia-Pacific region. Investment banking provides a powerful analytical framework because it reflects economic growth, cross-border M&amp;A activity, corporate restructuring, and valuation dynamics. While the success of institutions such as Goldman Sachs, JPMorgan, and Bank of America Securities demonstrates significant opportunities within Japan’s mature economy, capturing those opportunities requires navigating both Japan’s nuanced cultural environment and its complex legal and regulatory framework. My journey therefore integrates these dimensions into an actionable roadmap that bridges academic insight with real-world financial execution.
+            </p>
+            <p style="font-size:0.88rem; line-height:1.7; color:var(--text-secondary); margin-top:10px;">
+              At the outset of this journey, my perspective was shaped by a largely domestic, low-context business mindset. I viewed business through a transaction-oriented lens, emphasizing standardized valuation models, GAAP-based metrics, and detailed contractual protections. I often associated direct communication and rapid decision-making with effectiveness, while underestimating the importance of relationship building and consensus formation. During early investment banking recruiting experiences with a Japanese-based firm in Houston, I approached networking and interviews with respect for Japanese culture but limited understanding of the broader cultural competencies necessary for international business success. Likewise, I viewed foreign legal and regulatory systems as secondary considerations rather than recognizing them as critical determinants of cross-border value creation, transaction execution, and long-term market success.
+            </p>
+          </section>
+
+          <!-- SECTION III -->
+          <section style="border-left:3px solid var(--emerald); padding-left:18px;">
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--emerald-dark); margin-bottom:6px;">The Core Frameworks</h4>
+            <p style="font-size:0.88rem; line-height:1.7; color:var(--text-secondary);">
+              Ultimately, my global business consulting research equipped me with two indispensable cultural frameworks and a comprehensive methodology for dissecting foreign legal environments:
+            </p>
+            
+            <div style="background:var(--bone-base); border-radius:12px; padding:16px 18px; margin:12px 0; border:1px solid var(--sand-light);">
+              <h5 style="color:var(--emerald-dark); font-size:0.95rem; margin-bottom:6px;">1. Cultural Frameworks (Assignment 1 Findings)</h5>
+              <ul style="padding-left:18px; font-size:0.86rem; line-height:1.7; color:var(--text-secondary);">
+                <li><strong>Edward T. Hall’s Cultural Framework (HCF):</strong> Hall distinguishes high-context from low-context communication, proxemics, and time orientation (Changing Minds, n.d.). I learned that Japan is a high-context culture where communication depends heavily on shared background information, relationship status, nonverbal signals, and situational awareness (Genya, 2026). Messages are conveyed indirectly to preserve social harmony.</li>
+                <li><strong>Trompenaars’ Cultural Dimensions:</strong> Developed by Fons Trompenaars and Charles Hampden-Turner (Global-IQ, n.d.; Umbrex, n.d.), this model reveals that Japan is:
+                  <br>• <em>Particularistic:</em> Decisions depend on relationships, context, and situational factors rather than rigid universal rules.
+                  <br>• <em>Communitarian:</em> Prioritizes group harmony, collective responsibility, and shared outcomes over individual autonomy.
+                  <br>• <em>Diffuse:</em> Blends personal and professional lives through deep trust and long-term interaction.
+                  <br>• <em>Neutral:</em> Favors emotional restraint, composure, and controlled expression in professional settings.
+                  <br>• <em>Ascription-Oriented:</em> Status reflects age, tenure, education, and institutional position rather than individual performance alone.
+                  <br>• <em>Sequential Time:</em> Emphasizes methodical planning, order, and punctuality (contrasting with fast-paced U.S. multitasking).
+                  <br>• <em>External Control:</em> Recognizes social and environmental conditions, encouraging adaptability and alignment.
+                </li>
+              </ul>
+            </div>
+
+            <div style="background:var(--bone-base); border-radius:12px; padding:16px 18px; margin:12px 0; border:1px solid var(--sand-light);">
+              <h5 style="color:var(--emerald-dark); font-size:0.95rem; margin-bottom:6px;">2. Legal &amp; Regulatory Frameworks (Assignment 2 Findings)</h5>
+              <ul style="padding-left:18px; font-size:0.86rem; line-height:1.7; color:var(--text-secondary);">
+                <li><strong>Regulatory Requirements &amp; FSA Oversight:</strong> Under Japan's Financial Instruments and Exchange Act (FIEA), firms engaging in financial instruments business must register with the Financial Services Agency (FSA; Financial Services Agency, n.d.). The FSA exercises strict administrative authority regardless of firm nationality, and non-compliance leads to severe sanctions, operational suspensions, and catastrophic reputational damage (Financial Services Agency, 2026).</li>
+                <li><strong>Foreign Direct Investment (FDI) Regulations:</strong> Inward direct investments and cross-border M&amp;As are governed by the Foreign Exchange and Foreign Trade Act (FEFTA), administered by the Ministry of Finance (Ministry of Finance, n.d.), requiring prior screening for designated national security and critical sectors.</li>
+                <li><strong>Contract Law &amp; Good Faith:</strong> Governed primarily by Japan's Civil Code, which establishes that contracts are legally binding and enforceable, imposing an explicit statutory duty on parties to act in good faith (<em>bona fides</em>; Ohara &amp; Furukawa, 2024).</li>
+                <li><strong>Tax Considerations:</strong> Foreign financial institutions face complex corporate taxes, withholding taxes on cross-border capital repatriation, and permanent establishment risks that directly shape M&amp;A structuring (Otemachi Tax Accountant Corporation, n.d.).</li>
+                <li><strong>Dispute Resolution:</strong> While Japan provides judicial litigation, commercial practice heavily favors Alternative Dispute Resolution (ADR: arbitration and mediation) to control costs, avoid protracted public proceedings, and preserve commercial partnerships (Tokyo Startup Law Firm, 2025).</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- SECTION IV -->
+          <section style="border-left:3px solid var(--emerald); padding-left:18px;">
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--emerald-dark); margin-bottom:12px;">Cross-Application of learning Concepts</h4>
+
+            <div style="margin:12px 0; display:flex; flex-direction:column; gap:12px;">
+              <div style="background:#F6FBF8; border-left:3px solid var(--emerald); padding:14px; border-radius:0 10px 10px 0;">
+                <strong style="color:var(--emerald-dark); font-size:0.9rem;">Report 1: Navigating Japanese Culture (Challenges, Opportunities &amp; Recommendations)</strong>
+                <p style="font-size:0.84rem; color:var(--text-secondary); line-height:1.6; margin-top:4px;">
+                  • <em>Challenges Identified:</em> High-context indirect communication leads Americans to miss subtle cues; particularistic decision processes feel slow to rule-bound Westerners; communitarianism clashes with individual ownership; neutral emotional expression is misread as disinterest; and ascription hierarchy causes Americans to unintentionally bypass senior leaders (Changing Minds, n.d.; Umbrex, n.d.).<br>
+                  • <em>Strategic Opportunities:</em> Long-term relationship focus creates stable alliances; consensus-driven decision-making (informal consensus-building) ensures frictionless post-merger integration; respect for hierarchy opens doors to senior leadership; and a cultural dedication to quality and continuous improvement (continuous operational improvement) rewards high-caliber execution.<br>
+                  • <em>Consulting Recommendations:</em> Prioritize early relationship building by investing in trust-focused dialogues and informal interactions; diffuse personal and professional boundaries; slow down to allow collective consensus; and communicate with clarity, patience, and emotional restraint.
+                </p>
+              </div>
+
+              <div style="background:#F4F8FA; border-left:3px solid var(--baby-blue-deep); padding:14px; border-radius:0 10px 10px 0;">
+                <strong style="color:var(--emerald-dark); font-size:0.9rem;">Report 2: Entering Japan's Market (Legal Environment, Due Diligence &amp; Compliance)</strong>
+                <p style="font-size:0.84rem; color:var(--text-secondary); line-height:1.6; margin-top:4px;">
+                  • <em>Legal Risks &amp; Penalties:</em> Unregistered financial activities trigger FSA administrative action (FSA, 2026); failing to clear FEFTA prior notification halts cross-border M&amp;A transactions; and breach of good-faith obligations under the Civil Code impairs judicial enforceability.<br>
+                  • <em>Strategic Opportunities:</em> Japan's established legal stability, strong rule of law, predictable IP protection, and structured ADR mediation framework provide foreign entrants with substantial long-term certainty.<br>
+                  • <em>Consulting Recommendations:</em> U.S. investment banks must register with the FSA under the FIEA prior to launching operations, establish internal compliance monitoring systems, and conduct comprehensive pre-deal legal due diligence covering FEFTA filings, Civil Code good-faith warranties, Otemachi tax structuring, and ADR arbitration clauses.
+                </p>
+              </div>
+            </div>
+
+            <p style="font-size:0.88rem; line-height:1.7; color:var(--text-secondary); margin-top:10px;">
+              <strong>Application to My IB Recruitment Season:</strong> I brought these exact consulting recommendations directly into my investment banking recruitment interviews, informational chats, and firm webinars. In my interview discussions and networking touchpoints with a Japanese-based firm in Houston, I was able to showcase a sophisticated grasp of foreign regulatory compliance and stakeholder diplomacy. When discussing cross-border transactions where conventional candidates often propose abrupt layoffs and unilateral restructuring, I framed cross-border advisory through collective consensus and legal compliance. Bankers noted that my grasp of cultural execution and foreign regulatory reality demonstrated the maturity of an analyst with a unique, differentiated take on the global market.
+            </p>
+          </section>
+
+          <!-- SECTION V -->
+          <section style="border-left:3px solid var(--emerald); padding-left:18px;">
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--emerald-dark); margin-bottom:12px;">Development</h4>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;">
+              <div style="background:#FFF8F6; border:1px solid #FFDCD5; border-radius:12px; padding:16px;">
+                <span style="font-size:0.72rem; font-weight:800; color:#C0472A; text-transform:uppercase; display:block; margin-bottom:6px; letter-spacing:0.04em;">Where I Started</span>
+                <ul style="padding-left:16px; font-size:0.82rem; color:var(--text-secondary); line-height:1.6;">
+                  <li>Assumed universal American business and common-law rules apply everywhere.</li>
+                  <li>Treated networking and professional dialogue as hurried transactional checklists.</li>
+                  <li>Panicked during interview silences, interpreting pauses as incompetence.</li>
+                  <li>Focused exclusively on financial DCF models while ignoring regulatory compliance.</li>
+                  <li>Expected instant top-down decisions and adversarial legal enforcement.</li>
+                </ul>
+              </div>
+
+              <div style="background:#F4F9F5; border:1px solid #CCE3D6; border-radius:12px; padding:16px;">
+                <span style="font-size:0.72rem; font-weight:800; color:var(--emerald); text-transform:uppercase; display:block; margin-bottom:6px; letter-spacing:0.04em;">Where I Am Now</span>
+                <ul style="padding-left:16px; font-size:0.82rem; color:var(--text-secondary); line-height:1.6;">
+                  <li>Diagnose cultural dynamics using Hall's context lens and Trompenaars' 7 dimensions.</li>
+                  <li>Cultivate diffuse, trust-based relationships prior to introducing commercial proposals.</li>
+                  <li>Embrace silence (respectful contemplative pause) and neutral emotional poise under high-stakes pressure.</li>
+                  <li>Integrate FSA licensing, FIEA disclosures, and FEFTA FDI screening into financial pitches.</li>
+                  <li>Champion collective consensus (informal consensus-building) and ADR dispute resolution to preserve partnerships.</li>
+                </ul>
+              </div>
+            </div>
+
+            <p style="font-size:0.88rem; line-height:1.7; color:var(--text-secondary);">
+              In my personal recruitment journey, this transformation produced immediate results: my networking response rate increased, alumni and industry contacts became long-term mentors, and throughout recruitment interviews, chats, and webinars, bankers praised my ability to combine financial acumen with cross-border empathy and foreign regulatory awareness.
+            </p>
+          </section>
+
+          <!-- SECTION VI -->
+          <section style="border-left:3px solid var(--emerald); padding-left:18px;">
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--emerald-dark); margin-bottom:6px;">VI. Where I Am Going: Implementing What I Learned &amp; Future Deals</h4>
+            <p style="font-size:0.88rem; line-height:1.7; color:var(--text-secondary);">
+              As I implement what I learned in IB recruitment and prepare to apply these strategies to future investment banking deals, I carry a formal set of commitments that define my approach to international business:
+            </p>
+
+            <div style="background:var(--bone-base); border-left:4px solid var(--emerald); padding:18px 22px; border-radius:0 12px 12px 0; margin:12px 0;">
+              <strong style="color:var(--emerald-dark); font-size:0.92rem;">The Global Consultant Leadership Charter:</strong>
+              <ol style="padding-left:18px; font-size:0.85rem; color:var(--text-secondary); line-height:1.75; margin-top:8px;">
+                <li><strong>Build Relational Equity Before Transactional Demands:</strong> In high-context and diffuse markets, invest the time required to establish authentic human rapport, mutual respect, and diffuse trust.</li>
+                <li><strong>Execute Rigorous Legal Due Diligence:</strong> Never treat foreign legal systems as an afterthought; always verify regulatory licensing (FIEA/FSA), foreign investment screening (FEFTA), good-faith contractual principles (Civil Code), and ADR arbitration mechanisms.</li>
+                <li><strong>Honor Consensus and Organizational Hierarchy:</strong> Respect established ascription-based status and facilitate informal consensus-building (nemawashi) and collective alignment to ensure that cross-border deals are built on sustainable stakeholder alignment.</li>
+                <li><strong>Maintain Composure, Poise, and Active Listening:</strong> Treat silence (respectful contemplative pause) as a mark of respect and cognitive depth; communicate with emotional restraint and cultural humility.</li>
+              </ol>
+            </div>
+
+            <!-- Scholarly Bibliography -->
+            <div style="margin-top:20px; border-top:1px solid var(--sand-light); padding-top:14px;">
+              <h5 style="font-size:0.82rem; font-weight:800; text-transform:uppercase; color:var(--emerald-dark); letter-spacing:0.05em; margin-bottom:8px;">
+                Scholarly References (APA 7th Edition — Capstone Consulting Reports)
+              </h5>
+              <div style="font-size:0.77rem; color:var(--text-secondary); line-height:1.75;">
+                <p style="margin-bottom:5px;">Changing Minds. (n.d.). <em>Hall’s cultural factors</em>. https://www.changingminds.org/explanations/culture/hall_culture.htm</p>
+                <p style="margin-bottom:5px;">Financial Services Agency. (n.d.). <em>FAQ on Financial Instruments and Exchange Act: Section 6 Financial instruments business operator, etc.</em> Government of Japan. https://www.fsa.go.jp/en/laws_regulations/faq_on_fiea/section06.html</p>
+                <p style="margin-bottom:5px;">Financial Services Agency. (2026). <em>Administrative action in the financial sector</em>. Government of Japan. https://www.fsa.go.jp/en/refer/guide/action.html</p>
+                <p style="margin-bottom:5px;">Genya. (2026, September 7). <em>High-context vs. low-context: The foundation of Japanese communication</em>. https://ohashijozu.net/articles/high-context-vs-low-context</p>
+                <p style="margin-bottom:5px;">Global‑IQ. (n.d.). <em>Fons Trompenaars</em>. Global‑IQ. https://global-iq.org/fons-trompenaars/</p>
+                <p style="margin-bottom:5px;">International Trade Administration. (2025, November 18). <em>Japan – market entry strategy</em>. U.S. Department of Commerce. https://www.trade.gov/country-commercial-guides/japan-market-entry-strategy</p>
+                <p style="margin-bottom:5px;">Japan National Tourism Organization. (n.d.). <em>An overview of Japanese history</em>. https://www.japan.travel/en/responsible-travel-guide/features/overview-japanese-history/</p>
+                <p style="margin-bottom:5px;">Ministry of Finance. (n.d.). <em>Foreign Exchange and Foreign Trade Act</em>. Government of Japan. https://www.mof.go.jp/english/policy/international_policy/fdi/Laws_and_Regulations/FEFTA.pdf</p>
+                <p style="margin-bottom:5px;">OECD. (2026). <em>OECD economic surveys: Japan 2026</em>. OECD Publishing. https://www.oecd.org/en/publications/oecd-economic-surveys-japan-2026_54cc833d-en.html</p>
+                <p style="margin-bottom:5px;">Ohara, &amp; Furukawa. (2024, May 31). <em>Navigating contract law in Japan and international trade</em>. https://oharalaw-japan.com/2024/05/31/contract-law-in-japan/</p>
+                <p style="margin-bottom:5px;">Otemachi Tax Accountant Corporation. (n.d.). <em>Japan tax guide for foreign companies: Corporate tax, consumption tax &amp; compliance</em>. https://otemachi-group.co.jp/en/insights/tax-guide-japan/</p>
+                <p style="margin-bottom:5px;">The Wall Street Journal. (2026). <em>Investment banking scorecard: Comprehensive M&amp;A and capital markets data</em>. https://www.wsj.com/investment-banking-scorecard</p>
+                <p style="margin-bottom:5px;">Tokyo Startup Law Firm. (2025, December 23). <em>Dispute resolution in Japan: Litigation, arbitration, and mediation compared</em>. https://global-legal.tokyo-startup-law.or.jp/column/contracts-legal-compliance-dispute-resolution-japan-litigation-arbitration-mediation/</p>
+                <p style="margin-bottom:5px;">Umbrex. (n.d.). <em>Trompenaars' 7 dimensions of culture: Guide and application</em>. Umbrex Management Consulting.</p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    
+  
+
+  <!-- ==========================================================================
+       JAVASCRIPT: ENGINE & GAMES
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. DATA REPOSITORY: 10 NATIONS WITH QUICK CQ QUIZZES
+       ========================================================================== */
+    const COUNTRIES_DATA = {
+      "Japan": {
+        flag: "🇯🇵",
+        badge: "High-Context Relational Culture & Regulated Financial Hub",
+        contextPercent: 90,
+        lat: 36.2048,
+        lon: 138.2529,
+        sociocultural: "<strong>Hall's High-Context & Trompenaars' Communitarianism:</strong> Communication relies heavily on background information, relationship status, and nonverbal cues (Genya, 2026). Decisions prioritize group harmony, collective responsibility, and informal consensus-building before formal ratification. Status is ascription-oriented, reflecting age, tenure, and organizational position rather than individual performance alone (Umbrex, n.d.).",
+        etiquette: "Formal business protocol and respectful restraint. Emotional expression is neutral and composed; comfortable silence reflects cognitive contemplation, deep respect, and group deliberation.",
+        legal: "<strong>Civil Code Contract Law & Good Faith:</strong> Governed by Japan's Civil Code, which requires parties to act in good faith (<em>bona fides</em>). Corporate disputes favor Alternative Dispute Resolution (ADR: arbitration and mediation) over public litigation to preserve commercial relationships (Ohara & Furukawa, 2024; Tokyo Startup Law Firm, 2025).",
+        regulatory: "<strong>FSA Oversight, FIEA & FEFTA Screening:</strong> Financial institutions must register under the Financial Instruments and Exchange Act (FIEA) with the Financial Services Agency (FSA; FSA 2026, n.d.). Inward direct investment and cross-border M&A are screened by the Ministry of Finance under the Foreign Exchange and Foreign Trade Act (FEFTA; MOF, n.d.). Cross-border structuring must account for Otemachi withholding tax considerations.",
+        strategy: "<strong>Stable OECD Target & Cross-Border IB:</strong> As of October 2026, Japan's stable economy and active M&A environment make it a prime target for U.S. investment banks like Goldman Sachs, JPMorgan, and Bank of America Securities (WSJ, 2026; OECD, 2026). Success requires early diffuse trust-building, respecting hierarchy, and local joint-venture partnerships.",
+        distribution: "Multi-tiered wholesale distribution networks and diffuse corporate supplier alliances requiring deep relational commitment.",
+        cqTip: "Respect silence and hierarchy. Never push for an immediate closing before consensus is reached. Engage senior figures with protocol and conduct thorough legal due diligence under FIEA and FEFTA.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In early investment banking recruitment, when I was exploring opportunities with a Japanese-based firm in Houston, I approached recruitment interviews, networking chats, and firm webinars with genuine respect for Japanese culture, but had no formal insights in regards to the business acumen for Japan and moreover global cultures as a whole. I initially evaluated cross-border transactions through a narrow, domestic lens without appreciating the nuanced cultural and statutory dynamics required abroad.<br><br><strong>What I Discovered:</strong> From my global business research, I learned Edward T. Hall's High-Context communication, Trompenaars' 7 Dimensions (particularism, communitarianism, diffuse trust, neutral restraint, ascription hierarchy), and Japan's legal framework (FSA oversight under FIEA, FEFTA inward M&A screening, Civil Code good faith, and ADR dispute resolution).<br><br><strong>How I Applied It:</strong> In my recruitment interviews, informational chats, and firm webinars, I was able to showcase a sophisticated grasp of foreign regulatory compliance, cross-border M&A screening, and stakeholder diplomacy. In conversations regarding cross-border transactions, I demonstrated how to balance quantitative rigor with collective consensus and statutory due diligence.<br><br><strong>How It Helped Me Perform:</strong> This gave me a distinct skill showcase during recruitment, demonstrating a unique, highly differentiated take on the global market that set me apart from other candidates as I prepare to implement these insights on future investment banking deals.",
+        quiz: {
+          title: "🎯 Japan Capstone CQ & Legal Challenge",
+          scenario: "You are advising a top U.S. investment bank (e.g. Goldman Sachs or JPMorgan) expanding into Tokyo. During a cross-border acquisition negotiation, the lead Japanese executive pauses and remains silent for 30 seconds after your fee proposal. Furthermore, your legal team must clear local regulatory hurdles before deal closing. What is your culturally intelligent and lawful strategy?",
+          options: [
+            { text: "A) Interrupt the silence immediately to offer a discount, and execute the deal under US SEC rules without registering with Japan's Financial Services Agency (FSA).", correct: false, feedback: "Incorrect! In high-context Japan, interrupting silence violates respectful reflection, and operating without FSA registration under the FIEA triggers severe administrative sanctions (FSA, 2026)." },
+            { text: "B) Maintain comfortable, respectful silence while consensus develops, ensure formal registration under the FIEA with the FSA, and file inward FDI notifications under FEFTA.", correct: true, feedback: "Correct! In Japan, silence reflects contemplation and consensus-building, while FIEA registration with the FSA and FEFTA inward investment screening are legally mandatory for cross-border IB transactions (Ohara & Furukawa, 2024; FSA, 2026; MOF, n.d.)." },
+            { text: "C) Demand an immediate up-or-down vote and threaten adversarial litigation in Tokyo District Court if they hesitate.", correct: false, feedback: "Incorrect! Forcing public confrontation destroys business relationships, and Japanese business practice prioritizes Alternative Dispute Resolution (ADR) and Civil Code good faith over hostile litigation (Tokyo Startup Law Firm, 2025)." }
+          ]
+        }
+      },
+      "United States": {
+        flag: "🇺🇸",
+        badge: "Low-Context Explicit Communication & Universalist Benchmark",
+        contextPercent: 15,
+        lat: 40.7128,
+        lon: -74.0060,
+        sociocultural: "<strong>Hall's Low-Context & Trompenaars' Universalism / Individualism:</strong> Communication relies on clear, direct, and explicit verbal or written statements to minimize ambiguity (Changing Minds, n.d.). Business decisions follow standardized rules, objective performance metrics, and individual accountability rather than situational relationships.",
+        etiquette: "Direct, efficient, and bottom-line-upfront communication. Eye contact and assertive advocacy are valued as signs of confidence. Professional and personal spheres are strictly specific and compartmentalized.",
+        legal: "Exhaustive legal contracts specifying detailed contingencies, representations, and liquidated damages. Contractual rights are actively enforced through adversarial litigation in commercial courts.",
+        regulatory: "Oversight by the U.S. Securities and Exchange Commission (SEC) and FINRA, focusing on public disclosure, fiduciary duties, and capital market liquidity.",
+        strategy: "Driven by transaction velocity, quarterly financial metrics (EBITDA, ROI, IRR), and competitive bidding. Success depends on analytical precision, rapid execution, and explicit contractual protection.",
+        distribution: "Highly streamlined direct-to-market channels, digital supply chains, and liquid capital markets.",
+        cqTip: "Avoid assuming that U.S. low-context verbal directness and universalist rule enforcement work globally. In relational, high-context markets like Japan, abrupt transactional approaches cause severe friction.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> Initially, I assumed that American low-context communication—explicit verbal statements, rapid transactional pace, and aggressive contractual terms—was the universal standard for all global business transactions.<br><strong>What I Discovered:</strong> Edward T. Hall's Low-Context Continuum and Trompenaars' Universalism vs. Particularism. While the U.S. relies on explicit contracts and individual achievement, cross-border success in Japan requires adapting to high-context nonverbal cues and collective consensus.<br><strong>How I Applied It:</strong> In cross-border M&A case studies, I prepared dual-format presentations: quantitative low-context valuation decks for Western committees, alongside relationship-focused, consensus-building roadmaps for Japanese executive teams.<br><strong>How It Helped Me Perform:</strong> Recruitment interviewers praised my sophisticated dual-track communication strategy, noting that understanding both models is essential for international investment banking!",
+        quiz: {
+          title: "🎯 United States Benchmark Mission",
+          scenario: "A U.S. investment banking team is presenting an M&A proposal to an American private equity committee. Which communication and decision-making approach aligns with the U.S. cultural profile?",
+          options: [
+            { text: "A) Rely on subtle nonverbal cues and leave financial metrics ambiguous to preserve relationship harmony.", correct: false, feedback: "Incorrect! The U.S. is a low-context culture that demands explicit verbal clarity, quantitative rigor, and detailed financial analysis." },
+            { text: "B) Present clear, bottom-line financial metrics (EBITDA, IRR) with explicit written documentation and objective universal benchmarks.", correct: true, feedback: "Correct! Edward T. Hall's low-context framework and Trompenaars' universalism characterize U.S. business through explicit clarity, objective standards, and measurable results; Changing Minds, n.d." },
+            { text: "C) Avoid written contracts and finalize the multimillion-dollar transaction solely on informal trust.", correct: false, feedback: "Incorrect! U.S. business requires comprehensive, legally binding written contracts." }
+          ]
+        }
+      },
+      "Germany": {
+        flag: "🇩🇪",
+        badge: "Low-Context Sequential Precision & Universalist Rules",
+        contextPercent: 20,
+        lat: 51.1657,
+        lon: 10.4515,
+        sociocultural: "<strong>Hall's Low-Context & Trompenaars' Sequential Time:</strong> Communication is explicit, thorough, and highly structured, emphasizing factual accuracy and technical clarity. Decision-making follows Trompenaars' sequential time orientation: disciplined, step-by-step planning where punctuality and structured agendas govern business (Changing Minds, n.d.; Umbrex, n.d.).",
+        etiquette: "Formal and professional conduct. Punctuality is non-negotiable. Agendas are followed methodically, with thorough preparation and detailed technical discussions taking precedence over small talk.",
+        legal: "Codified civil law system with rigorous statutory enforcement. Commercial contracts are meticulously documented, leaving minimal room for ambiguity or informal interpretation.",
+        regulatory: "Strict regulatory compliance and rigorous governance oversight, emphasizing long-term capital adequacy, transparency, and methodical legal due diligence.",
+        strategy: "Cross-border expansion requires exhaustive documentation, clear milestone tracking, and detailed risk analysis. Decisions are made methodically based on technical competence and universal standards.",
+        distribution: "Highly structured engineering, logistics, and industrial supply corridors operating on tight, sequential schedules.",
+        cqTip: "Always arrive prepared with comprehensive written documentation and adhere strictly to agreed agendas. Demonstrating sequential precision and factual reliability builds immediate credibility.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In multi-asset modeling, I treated schedules and project milestones as flexible guidelines, which caused miscommunication when collaborating with European finance teams.<br><strong>What I Discovered:</strong> Trompenaars' Sequential Time Dimension and Hall's Low-Context Precision. Sequential cultures view time as a linear sequence of distinct events; adhering to precise timelines and structured agendas is fundamental to professional credibility.<br><strong>How I Applied It:</strong> In financial modeling sprints, I implemented rigorous milestone calendars, structured Gantt schedules, and systematic step-by-step audit checks.<br><strong>How It Helped Me Perform:</strong> During a cross-border project simulation, the assessment lead praised my operational discipline and sequential project tracking as flawless, advancing me to the final round!",
+        quiz: {
+          title: "🎯 Germany Low-Context & Sequential Time Mission",
+          scenario: "You are presenting a complex cross-border financial syndication to a Frankfurt-based institutional investor. How should you structure your meeting to align with low-context and sequential time expectations?",
+          options: [
+            { text: "A) Arrive 20 minutes late, discard the agenda, and jump between unrelated discussion topics randomly.", correct: false, feedback: "Incorrect! In sequential, low-context cultures, tardiness and unstructured agendas destroy credibility and trust." },
+            { text: "B) Adhere strictly to the pre-circulated agenda, present detailed technical documentation step-by-step, and respect precise time allocations.", correct: true, feedback: "Correct! Trompenaars' sequential time orientation and Hall's low-context model emphasize structured agendas, factual precision, and strict schedule adherence; Umbrex, n.d." },
+            { text: "C) Refuse to share financial slides and expect the investor to commit based solely on emotional intuition.", correct: false, feedback: "Incorrect! Universalist, low-context investors require detailed written evidence and structured analysis." }
+          ]
+        }
+      },
+      "China": {
+        flag: "🇨🇳",
+        badge: "High-Context Communitarianism & Particularistic Trust",
+        contextPercent: 85,
+        lat: 35.8617,
+        lon: 104.1954,
+        sociocultural: "<strong>Hall's High-Context & Trompenaars' Communitarianism / Particularism:</strong> Business relies heavily on shared contextual understanding, indirect communication, and long-term interpersonal relationships. Decisions prioritize group alignment, mutual face-saving, and relational commitments over rigid universal rules (Changing Minds, n.d.; Global-IQ, n.d.).",
+        etiquette: "High formality, deference to seniority, and careful preservation of professional dignity. Criticism is conveyed privately and diplomatically to avoid public embarrassment.",
+        legal: "Civil law system with evolving commercial codes. While statutory contracts are formal, business execution depends on underlying mutual trust and relational alignment.",
+        regulatory: "State administrative oversight and sector-specific foreign investment catalogs, requiring extensive regulatory filings and strategic governmental alignment.",
+        strategy: "Market entry requires patient, long-term relationship cultivation, joint-venture alliances, and indirect consensus-building before formal contract execution.",
+        distribution: "Diffuse commercial networks and state-enterprise distribution channels requiring deep institutional trust.",
+        cqTip: "Never confront a partner publicly or demand immediate contractual closure. Cultivate diffuse interpersonal trust and allow decisions to mature through group alignment.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In cross-border negotiations, I assumed that a signed term sheet was the end of negotiation, failing to realize that particularistic partners see agreements as evolving relationships.<br><strong>What I Discovered:</strong> Trompenaars' Particularism and Diffuse Dimensions. In particularistic cultures, commercial obligations are rooted in mutual relationships and situational context rather than immutable abstract clauses.<br><strong>How I Applied It:</strong> I incorporated ongoing post-signing relationship governance protocols into my cross-border advisory frameworks, ensuring continuous executive dialogue.<br><strong>How It Helped Me Perform:</strong> Interviewers remarked that my understanding of relationship-driven contract evolution reflected senior cross-border advisory depth!",
+        quiz: {
+          title: "🎯 China High-Context & Particularism Mission",
+          scenario: "During cross-border partnership discussions, a particularistic partner requests an adjustment to delivery terms due to unexpected supply chain disruptions. How should a culturally intelligent consultant respond?",
+          options: [
+            { text: "A) File a breach of contract lawsuit immediately without discussion.", correct: false, feedback: "Incorrect! Rigid legal hostility destroys relational trust in particularistic environments." },
+            { text: "B) Engage in constructive, face-to-face dialogue to accommodate the situational challenge and preserve the long-term partnership in good faith.", correct: true, feedback: "Correct! Trompenaars' particularism emphasizes relationship longevity, situational flexibility, and mutual trust over rigid, adversarial contract enforcement; Global-IQ, n.d." },
+            { text: "C) Denounce the partner publicly at an industry conference.", correct: false, feedback: "Incorrect! Public confrontation violates high-context face preservation and permanently terminates business ties." }
+          ]
+        }
+      },
+      "Brazil": {
+        flag: "🇧🇷",
+        badge: "Diffuse Boundaries & Affective Warmth Benchmark",
+        contextPercent: 75,
+        lat: -14.2350,
+        lon: -51.9253,
+        sociocultural: "<strong>Trompenaars' Diffuse Boundaries & Affective Expression:</strong> Business interactions blend personal and professional spheres. Decision-making is heavily influenced by personal trust, relational warmth, and expressive emotional communication, contrasting sharply with specific, neutral business styles (Global-IQ, n.d.; Umbrex, n.d.).",
+        etiquette: "Warm interpersonal greetings, engaged eye contact, and expressive communication. Establishing personal rapport through social conversation is an essential prerequisite before conducting business discussions.",
+        legal: "Civil law system with formal statutory requirements. However, navigating complex regulatory procedures requires strong local partnerships and interpersonal trust.",
+        regulatory: "Complex administrative and tax compliance requirements that demand trusted local legal counsel and continuous stakeholder engagement.",
+        strategy: "Successful commercial entry depends on building diffuse personal trust with executive leadership and partnering with reputable local operators.",
+        distribution: "Regional wholesale and retail networks driven by long-standing personal commercial alliances.",
+        cqTip: "Do not dive straight into business figures. Invest time in personal relationship-building to establish diffuse trust before presenting technical proposals.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In networking calls, I used to launch straight into technical finance questions, coming across as cold, transactional, and purely self-serving.<br><strong>What I Discovered:</strong> Trompenaars' Specific vs. Diffuse and Neutral vs. Affective Dimensions. In diffuse cultures, people need to know who you are personally before they decide to do business with you professionally.<br><strong>How I Applied It:</strong> I restructured my informational interviews: spending the first 10 minutes asking about their career journey, passions, and firm culture before asking technical advice.<br><strong>How It Helped Me Perform:</strong> My networking call conversion into first-round interview referrals increased dramatically, as bankers felt a genuine personal connection rather than an aggressive transaction!",
+        quiz: {
+          title: "🎯 Brazil Diffuse & Affective Mission",
+          scenario: "You are meeting a Latin American corporate executive for an initial M&A advisory briefing. Which approach best builds credibility in a diffuse, affective business culture?",
+          options: [
+            { text: "A) Refuse to introduce yourself, demand they sign an NDA within 60 seconds, and avoid all personal pleasantries.", correct: false, feedback: "Incorrect! In diffuse, affective cultures, skipping personal connection appears rude and untrustworthy." },
+            { text: "B) Engage in warm, professional conversation, show genuine interest in the person and organization, and build interpersonal rapport before discussing deal metrics.", correct: true, feedback: "Correct! Trompenaars' diffuse and affective dimensions show that personal rapport and mutual trust form the foundation of commercial collaboration; Global-IQ, n.d." },
+            { text: "C) Communicate entirely through automated email bots and refuse all live dialogue.", correct: false, feedback: "Incorrect! Diffuse cultures value personal, human engagement." }
+          ]
+        }
+      },
+      "India": {
+        flag: "🇮🇳",
+        badge: "High-Context Synchronic Agility & Ascription Hierarchy",
+        contextPercent: 70,
+        lat: 20.5937,
+        lon: 78.9629,
+        sociocultural: "<strong>Hall's High-Context & Trompenaars' Ascription / Synchronic Time:</strong> Communication blends relationship context with deep respect for seniority, organizational hierarchy, and institutional status. Decision-making reflects synchronic time: multi-tasking flexibility and adaptability in navigating complex environments (Changing Minds, n.d.; Umbrex, n.d.).",
+        etiquette: "Formal deference to senior executives and organizational leaders. Business meetings involve hospitality and relationship-building before transactional negotiations.",
+        legal: "Common law legal framework with comprehensive commercial statutes. Dispute resolution increasingly utilizes arbitration and mediation to navigate judicial backlogs.",
+        regulatory: "Active oversight by financial regulators (SEBI, RBI) overseeing foreign direct investment, capital repatriation, and cross-border M&A transactions.",
+        strategy: "Combine strategic agility with deep respect for organizational hierarchy. Build alliances with respected corporate leaders to navigate complex regulatory landscapes.",
+        distribution: "Multi-tiered distribution networks spanning modern corporate retail and extensive traditional trade partnerships.",
+        cqTip: "Acknowledge senior decision-makers with formal deference. Remain patient and flexible with scheduling while maintaining disciplined follow-through.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In case competitions, I panicked when unexpected variables were introduced, clinging rigidly to my initial static financial model.<br><strong>What I Discovered:</strong> Trompenaars' Synchronic Time Orientation and Hall's High-Context Adaptability. Synchronic cultures manage multiple fluid priorities simultaneously, viewing change as an opportunity for creative problem-solving.<br><strong>How I Applied It:</strong> I built dynamic scenario analysis tools with interactive toggles for macro shocks, regulatory shifts, and valuation sensitivity.<br><strong>How It Helped Me Perform:</strong> When the judging panel threw a surprise curveball during the final presentation, our team dynamically toggled our model and walked through contingency scenarios, winning top honors!",
+        quiz: {
+          title: "🎯 India Synchronic Agility & Hierarchy Mission",
+          scenario: "During a commercial negotiation, unexpected macroeconomic volatility alters your target's operating costs. How should a team trained in synchronic agility and high-context problem-solving adapt?",
+          options: [
+            { text: "A) Abandon the project entirely and refuse to engage with the partner.", correct: false, feedback: "Incorrect! Synchronic cultures thrive on flexible adaptation and relational continuity." },
+            { text: "B) Collaboratively review assumptions with the partner, demonstrate flexibility, and re-engineer the financial structure to absorb the change.", correct: true, feedback: "Correct! Synchronic adaptability and relational problem-solving allow partners to navigate dynamic environments collaboratively; Umbrex, n.d." },
+            { text: "C) Insist on enforcing the initial draft without adjusting to economic reality.", correct: false, feedback: "Incorrect! Rigid inflexibility in volatile environments leads to deal breakdown." }
+          ]
+        }
+      },
+      "Kenya": {
+        flag: "🇰🇪",
+        badge: "Communitarian Cooperation & Relational Consensus",
+        contextPercent: 65,
+        lat: -1.2921,
+        lon: 36.8219,
+        sociocultural: "<strong>Trompenaars' Communitarianism & Relational Trust:</strong> Business is anchored on communitarian mutual support, community stakeholder engagement, and collective consensus. Economic progress is achieved through collaborative partnerships and shared social responsibility (Global-IQ, n.d.; Umbrex, n.d.).",
+        etiquette: "Polite personal greetings and inquiries about well-being precede professional discussions. Respect for community leaders and institutional standing is essential.",
+        legal: "Common law legal framework supplemented by statutory commercial codes. Commercial contracts are binding, but enforcement is supported by informal mediation and community trust.",
+        regulatory: "Proactive financial technology regulatory oversight fostering innovative cross-border mobile capital flows and regional economic integration.",
+        strategy: "Market entry succeeds when commercial objectives align with local economic empowerment and community stakeholder alignment.",
+        distribution: "Rapidly evolving digital distribution corridors, decentralized mobile financial platforms, and regional trade networks.",
+        cqTip: "Invest in stakeholder diplomacy. Ensuring that all community and institutional stakeholders benefit from a venture fosters long-term operational resilience.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In equity research challenges, my team initially stuck to pitching domestic blue chips, blending into a sea of identical presentations without differentiated macroeconomic insight.<br><strong>What I Discovered:</strong> Trompenaars' Communitarian Dimension and developing market leapfrogging models. Collaborative, community-aligned business models can bypass legacy infrastructure straight to modern decentralized platforms.<br><strong>How I Applied It:</strong> I pitched an emerging cross-border mobile payments and financial inclusion platform, analyzing macroeconomic growth and capital flow metrics.<br><strong>How It Helped Me Perform:</strong> The judging panel was impressed by our original global macroeconomic thesis, awarding our team 1st place in the global cross-border pitch competition!",
+        quiz: {
+          title: "🎯 Kenya Communitarian Consensus Mission",
+          scenario: "An international financial advisory firm is evaluating an infrastructure investment in an emerging market. Which principle best reflects Trompenaars' communitarian framework?",
+          options: [
+            { text: "A) Prioritize short-term individual executive bonuses while disregarding community stakeholders.", correct: false, feedback: "Incorrect! That represents extreme individualism, which triggers severe stakeholder resistance in communitarian cultures." },
+            { text: "B) Engage local community stakeholders early, align commercial incentives with collective social value, and build consensus.", correct: true, feedback: "Correct! Trompenaars' communitarianism emphasizes collective responsibility, group harmony, and shared value creation; Global-IQ, n.d." },
+            { text: "C) Unilaterally seize resources without consulting local partners.", correct: false, feedback: "Incorrect! Communitarian business practices require collaborative consensus and mutual benefit." }
+          ]
+        }
+      },
+      "United Arab Emirates": {
+        flag: "🇦🇪",
+        badge: "High-Context Consultative Consensus & Relationship Diplomacy",
+        contextPercent: 80,
+        lat: 23.4241,
+        lon: 53.8478,
+        sociocultural: "<strong>Hall's High-Context & Trompenaars' Particularism / Ascription:</strong> Business transactions are embedded in long-term personal relationships, consultative dialogue, and deep respect for leadership status and institutional standing (Changing Minds, n.d.; Global-IQ, n.d.).",
+        etiquette: "Warm, consultative hospitality and ceremonial courtesy. Substantive negotiations develop gradually through personal meetings, shared meals, and trust cultivation.",
+        legal: "Dual legal system combining civil law courts with common law international financial free zones (e.g., DIFC, ADGM) featuring independent commercial courts and arbitration centers.",
+        regulatory: "Sophisticated financial regulation through dedicated free zone authorities alongside federal central bank oversight, governing sovereign wealth and private capital.",
+        strategy: "Establish executive-level presence, demonstrate long-term commitment to regional vision, and respect consultative consensus-building processes.",
+        distribution: "Global trade hubs and state-backed investment consortiums with worldwide commercial reach.",
+        cqTip: "Never rush negotiation timelines. Dedicate personal time to hospitality and consultative meetings; agreements are ratified only after personal trust is established.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In high-stakes interviews, I used to view initial hospitality and casual conversation as time wasted before the 'real' technical questions.<br><strong>What I Discovered:</strong> Hall's High-Context Relational Foundation. In consultative business cultures, the informal dialogue is the real interview—it is where character, composure, and emotional intelligence are evaluated.<br><strong>How I Applied It:</strong> I treated every interview from the moment I entered the lobby as an exercise in executive presence, engaging warmly with everyone from the receptionist to the managing director.<br><strong>How It Helped Me Perform:</strong> An executive recruiter told me that my calm warmth, conversational poise, and consultative presence made me an unanimous first choice for the client-facing advisory cohort!",
+        quiz: {
+          title: "🎯 UAE Consultative Diplomacy Mission",
+          scenario: "You are invited to a consultative dinner with the executive team of an international sovereign fund. How should you conduct yourself during this high-context interaction?",
+          options: [
+            { text: "A) Pull out a 100-page contract during the appetizer, demand immediate signatures, and ignore personal conversation.", correct: false, feedback: "Incorrect! Pushing transactional demands during social hospitality destroys rapport in high-context cultures." },
+            { text: "B) Participate graciously in hospitality, demonstrate personal humility, build mutual rapport, and allow business discussion to arise naturally.", correct: true, feedback: "Correct! In high-context consultative cultures, hospitality and personal rapport are the bedrock of multi-billion-dollar commercial partnerships; Changing Minds, n.d." },
+            { text: "C) Express boredom and look at your phone throughout the meal.", correct: false, feedback: "Incorrect! Disrespecting host hospitality eliminates any possibility of commercial partnership." }
+          ]
+        }
+      },
+      "United Kingdom": {
+        flag: "🇬🇧",
+        badge: "Low-Context Verbal Precision & Understated Restraint",
+        contextPercent: 35,
+        lat: 55.3781,
+        lon: -3.4360,
+        sociocultural: "<strong>Hall's Low-Context & Trompenaars' Neutral Restraint:</strong> Communication is primarily low-context and task-focused, but nuanced by polite understatement, subtle irony, and emotional restraint. Professional competence is signaled through composure, measured analysis, and deliberate moderation (Changing Minds, n.d.; Umbrex, n.d.).",
+        etiquette: "Polite, civil, and understated discourse. Strong opinions are expressed with diplomatic moderation (e.g., 'that is an interesting idea' often signals significant reservation).",
+        legal: "Common law legal framework serving as a global benchmark for international commercial dispute resolution, contractual interpretation, and arbitration.",
+        regulatory: "Oversight by the Financial Conduct Authority (FCA) and Prudential Regulation Authority (PRA), emphasizing market transparency, capital adequacy, and statutory compliance.",
+        strategy: "Cross-border advisory requires rigorous quantitative analysis combined with understated, composed presentation. Avoid overselling or hyperbole.",
+        distribution: "Global financial corridors and institutional syndication networks linking European and global capital markets.",
+        cqTip: "Decode polite understatement carefully. Do not mistake diplomatic moderation for enthusiastic agreement; analyze underlying questions thoroughly.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> In an interview with a London-based investment bank, I took subtle British understatement literally, missing their polite skepticism of my aggressive valuation assumptions.<br><strong>What I Discovered:</strong> Hall's Contextual Nuance and Trompenaars' Neutral Restraint. In understated cultures, phrases like 'that is a brave assumption' or 'quite interesting' are polite cues signaling significant analytical reservations.<br><strong>How I Applied It:</strong> Instead of defensively doubling down on aggressive assumptions, I acknowledged their subtle critique, smiled, and flexibly modeled downside risk scenarios.<br><strong>How It Helped Me Perform:</strong> The interviewer commended my emotional composure, analytical flexibility, and receptive executive presence, extending me a final-round invitation!",
+        quiz: {
+          title: "🎯 United Kingdom Understatement Mission",
+          scenario: "During an M&A valuation review in London, a senior partner remarks: 'That is a rather brave terminal growth assumption.' How should a culturally intelligent analyst interpret this feedback?",
+          options: [
+            { text: "A) Assume the partner is praising your extraordinary personal courage.", correct: false, feedback: "Incorrect! In British corporate understatement, 'brave' is a diplomatic signal of excessive risk or questionable assumptions." },
+            { text: "B) Recognize that the partner is politely signaling serious reservations about the assumption, and walk through downside sensitivity scenarios.", correct: true, feedback: "Correct! Decoding understated, neutral critique allows analysts to respond with analytical maturity and poise; Umbrex, n.d." },
+            { text: "C) Insist loudly that the partner does not understand basic valuation mathematics.", correct: false, feedback: "Incorrect! Defensive aggression violates professional composure and ends career advancement." }
+          ]
+        }
+      },
+      "Mexico": {
+        flag: "🇲🇽",
+        badge: "Diffuse Relational Trust & Particularistic Alignment",
+        contextPercent: 75,
+        lat: 23.6345,
+        lon: -102.5528,
+        sociocultural: "<strong>Trompenaars' Diffuse Boundaries & Particularism:</strong> Business relies heavily on interpersonal trust, relational loyalty, and personal connection. Commercial agreements depend on long-term personal rapport between executive counterparts rather than cold legal clauses alone (Global-IQ, n.d.; Umbrex, n.d.).",
+        etiquette: "Warm, polite, and respectful interpersonal interactions. Face-to-face meetings and sharing meals are critical for establishing mutual trust before finalizing agreements.",
+        legal: "Civil law system with formal statutory contracts. However, contractual fulfillment and dispute resolution are heavily influenced by ongoing relational goodwill and good faith.",
+        regulatory: "Cross-border trade and investment oversight balancing foreign investment incentives with domestic labor and regulatory compliance standards.",
+        strategy: "Successful cross-border expansion requires active executive presence, cultivating deep relational equity with local partners, and respecting organizational hierarchy.",
+        distribution: "Modern industrial trade corridors alongside established relational supplier alliances.",
+        cqTip: "Prioritize relational trust and personal presence. Face-to-face collaboration resolves commercial obstacles far more effectively than legal confrontation.",
+        recruitmentNote: "<strong>Where I Struggled:</strong> When analyzing cross-border industrial targets, I evaluated supply chains through pure unit economics without accounting for relationship governance or supplier loyalty.<br><strong>What I Discovered:</strong> Trompenaars' Diffuse and Particularistic Dimensions. Cross-border commercial supply contracts require mutual face-to-face trust and interpersonal alignment to ensure supply continuity.<br><strong>How I Applied It:</strong> In an industrial coverage case interview, I modeled cross-border trade cost advantages while emphasizing supplier relationship governance and executive touchpoints.<br><strong>How It Helped Me Perform:</strong> The sector head remarked that my presentation reflected real-world commercial execution rather than textbook theory, extending a full-time offer!",
+        quiz: {
+          title: "🎯 Mexico Relational Trust Mission",
+          scenario: "You face a production delay with a supplier in Monterrey during a cross-border supply chain integration. What is the most effective approach to resolve it?",
+          options: [
+            { text: "A) Send an automated legal breach letter demanding liquidated damages.", correct: false, feedback: "Incorrect! Hostile legal threats destroy interpersonal trust and goodwill in relational business cultures." },
+            { text: "B) Travel to meet the partner in person, share a meal, understand the operational bottleneck, and resolve the obstacle collaboratively.", correct: true, feedback: "Correct! In diffuse, particularistic cultures, face-to-face personal engagement and mutual trust resolve commercial challenges far faster than legal threats; Global-IQ, n.d." },
+            { text: "C) Post a critical public review on social media to shame the supplier.", correct: false, feedback: "Incorrect! Public humiliation permanently destroys commercial relationships." }
+          ]
+        }
+      }
+    };
+
+    /* ==========================================================================
+       2. FIELD JOURNAL ENTRIES (THE 6 CHAPTERS) (THE 6 CHAPTERS)
+       ========================================================================== */
+    const FIELD_JOURNAL_ENTRIES = [
+      {
+        id: 1,
+        title: "Overcoming the Low-Context Blindspot: Hall's Framework & Nonverbal Cues in Tokyo IB",
+        tag: "Assignment 1 // Hall's Cultural Framework",
+        minXP: 0,
+        struggle: "In early investment banking recruitment and alumni networking, I relied strictly on blunt, low-context American communication. In cold outreach and mock cross-border pitches involving Japanese financial institutions (Goldman Sachs / JPMorgan / BofA lens), I pushed for immediate, transactional answers. I completely missed subtle nonverbal cues, background context, and indirect signals, naively assuming that the absence of a verbal 'no' meant agreement.",
+        discovery: "Edward T. Hall’s Cultural Framework (HCF; Changing Minds, n.d.; Genya, 2026). Japan is a high-context culture where communication depends deeply on background information, relationship status, nonverbal signals, and situational awareness. Messages are conveyed indirectly rather than stated explicitly, and proxemics and comfortable, respectful pauses and nonverbal cues are integral to professional dialogue and trust-building.",
+        application: "I completely overhauled my networking and interview strategy. Instead of pitching myself bluntly in cold outreach, I invested time in building rapport, asking insightful questions about cross-border deal culture, and researching firm history. In technical IB case interviews involving Japanese targets, I factored in high-context dynamics, advising clients to read situational cues rather than pressing for immediate contractual declarations.",
+        developed: "My networking response rate increased, and interviewers noted my exceptional emotional intelligence and situational maturity. Unlocking this insight proved that cultural communication is the foundation of high finance. Keep exploring global nodes and earning XP to unlock Chapter 2: Trompenaars' Particularism & Communitarianism in M&A!"
+      },
+      {
+        id: 2,
+        title: "Particularism & Communitarianism: Why Collective Consensus Beats Top-Down Mandates",
+        tag: "Assignment 1 // Trompenaars' Dimensions",
+        minXP: 250,
+        struggle: "During early cross-border discussions, I evaluated an acquisition of a Japanese industrial supplier using a rigid Western Universalist mindset. I proposed unilateral, top-down operational cuts and individual performance bonuses to drive immediate EBITDA, assuming standard US corporate governance applied universally.",
+        discovery: "Fons Trompenaars & Charles Hampden-Turner’s Cultural Dimensions (Global-IQ, n.d.; Umbrex, n.d.). Japan is Particularistic (decisions depend on relationships, context, and situational circumstances rather than universal rules) and Communitarian (prioritizing group harmony, collective responsibility, and shared outcomes over individual autonomy). Cross-border success requires informal consensus-building (informal consensus-building behind the scenes) before formal ratification.",
+        application: "I paused during the interview discussion and pivoted my strategy: 'While universalist cost-cutting looks attractive on paper, in Japan, unilateral restructuring fractures stakeholder trust and destroys supplier networks. We must adopt a particularistic, consensus-driven governance model, aligning division heads through informal consensus-building prior to board announcements.' In behavioral interviews, I framed my team experiences around collective accomplishments rather than solo achievements.",
+        developed: "The Managing Director noted that while many candidates could build financial models, almost none understood the human and cultural realities of cross-border post-merger integration, highlighting a unique and mature take on the global market."
+      },
+      {
+        id: 3,
+        title: "Specific vs. Diffuse Boundaries & Neutral Composure (Ma) Under Interview Pressure",
+        tag: "Assignment 1 // Emotional Poise & Trust",
+        minXP: 500,
+        struggle: "In early high-stakes behavioral interviews, I maintained rigid 'Specific' boundaries—treating conversations as strictly transactional business exchanges—and exhibited high 'Affective' expressiveness. When senior interviewers or Japanese executive mentors remained emotionally neutral and contemplative, I panicked, interpreting their calm silence as disinterest or failure, which caused me to ramble awkwardly.",
+        discovery: "Trompenaars' Specific vs. Diffuse & Neutral vs. Affective dimensions (Global-IQ, n.d.; Umbrex, n.d.). Japan is Diffuse, where personal trust and professional collaboration blend over long-term interaction, and Neutral, where professional competence is shown through emotional control, dignity, and measured restraint. Furthermore, silence (respectful contemplative pause) is not dead air; it is an active sign of cognitive contemplation, deep respect, and seriousness.",
+        application: "I trained myself to embrace emotional neutrality and silence under intense interview pressure. When faced with complex valuation or restructuring questions, I took a composed 5-second breath, maintained poised eye contact, and deliberately structured my response. In networking, I leaned into diffuse trust-building, showing authentic interest in alumni career journeys rather than abruptly demanding resume reviews.",
+        developed: "Interviewers specifically complimented my poise, executive presence, and grace under pressure. Mastering diffuse trust turned one-off informational chats into senior executive champions who sponsored my candidacy. Keep earning XP across global nodes to unlock Chapter 4: Ascription Hierarchy & Disciplined Execution!"
+      },
+      {
+        id: 4,
+        title: "Ascription-Based Hierarchy & Sequential Time: The Discipline of Cross-Border Deal Execution",
+        tag: "Assignment 1 // Organizational Hierarchy",
+        minXP: 800,
+        struggle: "Coming from an American business perspective that prizes speed, multitasking, and informal flat organizations, I assumed that deal speed was the primary metric of success. In mock cross-border pitches, I attempted to circumvent senior executives to engage faster-moving junior teams directly, pushing aggressive 30-day closing deadlines that felt rushed and disrespectful.",
+        discovery: "Trompenaars’ Ascription vs. Achievement orientation and Sequential Time framework (ITA, 2025; Umbrex, n.d.). In Japan, status is ascription-oriented, reflecting age, tenure, education, and institutional standing. Pushing junior contacts or bypassing senior leadership damages organizational credibility. Furthermore, Japan follows Sequential time, prioritizing methodical planning, order, punctuality, and step-by-step risk mitigation over rushed multitasking.",
+        application: "I adapted my timeline modeling and stakeholder communication. In cross-border advisory simulations, I mapped hierarchical protocols, ensuring senior leaders were formally engaged with ceremonial respect while building buy-in through sequential milestones. In my own recruitment preparation, I established a disciplined, sequential interview schedule and demonstrated deep respect for senior partners' institutional legacy.",
+        developed: "Partners commended my institutional maturity, noting that clients entrust multi-billion dollar cross-border mandates only to advisors who respect organizational hierarchy and execute with meticulous precision."
+      },
+      {
+        id: 5,
+        title: "FSA Oversight & FIEA Licensing: Navigating Japan’s Financial Legal Architecture",
+        tag: "Assignment 2 // Legal & Regulatory Framework",
+        minXP: 1200,
+        struggle: "In finance competitions and investment banking case studies, I initially treated regulatory compliance as a mere legal formality handled by external lawyers. In an international expansion model, I naively assumed that a top-tier U.S. investment bank (like Goldman Sachs, JPMorgan, or BofA Securities) could launch cross-border financial advisory in Tokyo under existing U.S. SEC/FINRA credentials without local registration.",
+        discovery: "Japan's Financial Services Agency (FSA) and the Financial Instruments and Exchange Act (FIEA; Financial Services Agency, 2026, n.d.). Any firm engaging in financial instruments business must formally register with the FSA and adhere to strict securities regulations, disclosure rules, and capital adequacy requirements. The FSA enforces administrative sanctions against non-compliant institutions regardless of firm nationality or size, and violations cause severe operational bans and catastrophic reputational damage.",
+        application: "I incorporated comprehensive Japanese regulatory compliance into my capstone consulting recommendations and cross-border M&A pitches. I detailed how foreign investment banks establish local entities in Tokyo, obtain FSA registration under the FIEA, establish internal compliance monitoring systems, and structure capital to fulfill Japanese regulatory audits.",
+        developed: "During a final-round interview with a global investment bank's cross-border financial institutions group (FIG), the interviewers were stunned that an undergraduate understood the exact regulatory hurdles of FIEA licensing and FSA administrative enforcement. Demonstrating this legal diligence set me apart from every other candidate!"
+      },
+      {
+        id: 6,
+        title: "FEFTA M&A Screening, Civil Code Good Faith & ADR: The Complete Cross-Border Playbook",
+        tag: "Assignment 2 // Due Diligence & Dispute Resolution",
+        minXP: 1600,
+        struggle: "When analyzing cross-border M&A in Japan, I overlooked national security screening on inward foreign investment and assumed that contract disputes would be resolved through aggressive, adversarial litigation in open court, as is standard in the United States.",
+        discovery: "The Foreign Exchange and Foreign Trade Act (FEFTA), Japan's Civil Code contract law, and Alternative Dispute Resolution (ADR; Ministry of Finance, n.d.; Ohara & Furukawa, 2024; Tokyo Startup Law Firm, 2025; Otemachi, n.d.). Under FEFTA, foreign acquisitions in designated core sectors require prior notification and screening by the Ministry of Finance. Japan's Civil Code requires parties to act in good faith (<em>bona fides</em>), and corporate disputes are overwhelmingly resolved through ADR (arbitration and mediation) to preserve long-term partnerships and avoid public courtroom battles.",
+        application: "I created an integrated legal and cultural due diligence framework for international market entry: filing FEFTA prior notifications, structuring cross-border tax considerations with local specialists (addressing withholding taxes and permanent establishment risks), drafting contracts under Civil Code good-faith principles, and embedding ADR mediation/arbitration clauses. In my recruitment interviews, I used this holistic playbook to answer complex deal structuring questions.",
+        developed: "This comprehensive framework served as my capstone consulting achievement during recruitment season. It proved that successful international dealmakers do not simply run financial models—they master the cultural subtleties, regulatory statutes, and legal frameworks that govern global business. You have completed the Global Diplomat journey! Review your full Digital Learning Story in the top bar!"
+      }
+    ];
+
+    /* ==========================================================================
+       3. SOUND ENGINE
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      }
+      playClick() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+      }
+      playSuccess() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.14, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.25);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.25);
+        });
+      }
+      playError() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.2);
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      }
+      toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+      }
+    }
+    const sound = new SoundEngine();
+
+    /* ==========================================================================
+       4. PLAYER PROGRESSION & NOTIFICATIONS
+       ========================================================================== */
+    class PlayerProgress {
+      constructor() {
+        this.xp = parseInt(localStorage.getItem('geb_xp') || '150', 10);
+        this.unlockedJournal = JSON.parse(localStorage.getItem('geb_journal_unlocked') || '[1]');
+        this.visitedCountries = JSON.parse(localStorage.getItem('geb_visited') || '[]');
+        this.ranks = [
+          { min: 0, title: "Novice Expatriate", badge: "🌱" },
+          { min: 300, title: "Global Strategist", badge: "🧭" },
+          { min: 700, title: "International Ops Lead", badge: "🌐" },
+          { min: 1200, title: "Multinational Strategist", badge: "🏛️" },
+          { min: 1800, title: "Global Diplomat & Executive", badge: "👑" }
+        ];
+        this.checkMilestones(false);
+        this.updateUI();
+      }
+      addXP(amount, reason = "") {
+        this.xp += amount;
+        localStorage.setItem('geb_xp', this.xp.toString());
+        this.checkMilestones(true);
+        this.updateUI();
+        sound.playSuccess();
+        if (reason) showNotification(`+${amount} XP: ${reason}!`);
+      }
+      checkMilestones(announce = true) {
+        FIELD_JOURNAL_ENTRIES.forEach(entry => {
+          if (this.xp >= entry.minXP && !this.unlockedJournal.includes(entry.id)) {
+            this.unlockedJournal.push(entry.id);
+            localStorage.setItem('geb_journal_unlocked', JSON.stringify(this.unlockedJournal));
+            if (announce) {
+              // Journal unlocked
+              this.xp += 50;
+            }
+          }
+        });
+      }
+      recordVisit(country) {
+        if (!this.visitedCountries.includes(country)) {
+          this.visitedCountries.push(country);
+          localStorage.setItem('geb_visited', JSON.stringify(this.visitedCountries));
+          this.addXP(40, `Explored ${country}`);
+        }
+      }
+      getRank() {
+        let current = this.ranks[0];
+        for (let r of this.ranks) {
+          if (this.xp >= r.min) current = r;
+        }
+        return current;
+      }
+      updateUI() {
+        const rank = this.getRank();
+        const xpEl = document.getElementById('xpPointsDisplay');
+        const badgeEl = document.getElementById('rankBadgeIcon');
+        const titleEl = document.getElementById('rankTitleDisplay');
+        const countEl = document.getElementById('unlockedJournalCount');
+        const lbXp = document.getElementById('lbPlayerXP');
+        const lbRank = document.getElementById('lbPlayerRank');
+
+        if (xpEl) xpEl.textContent = this.xp;
+        if (badgeEl) badgeEl.textContent = "🏆";
+        if (titleEl) titleEl.textContent = "Global Leaderboard";
+        if (countEl) countEl.textContent = this.unlockedJournal.length;
+        if (lbXp) lbXp.textContent = `${this.xp} XP`;
+        if (lbRank) lbRank.textContent = rank.title;
+
+        renderJournalFeed(this.unlockedJournal);
+      }
+    }
+    window.player = new PlayerProgress();
+    const player = window.player;
+
+    function showNotification(msg) {
+      const banner = document.createElement('div');
+      banner.style.position = 'fixed';
+      banner.style.bottom = '24px';
+      banner.style.right = '24px';
+      banner.style.background = '#1B4332';
+      banner.style.color = '#FBF9F5';
+      banner.style.padding = '12px 20px';
+      banner.style.borderRadius = '30px';
+      banner.style.fontWeight = '700';
+      banner.style.fontSize = '0.86rem';
+      banner.style.boxShadow = '0 10px 30px rgba(0,0,0,0.25)';
+      banner.style.zIndex = '9999';
+      banner.style.border = '1px solid #A2D2DF';
+      banner.textContent = msg;
+      document.body.appendChild(banner);
+      setTimeout(() => {
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(10px)';
+        setTimeout(() => banner.remove(), 400);
+      }, 2600);
+    }
+
+    function renderJournalFeed() { /* Field Journal removed */ }
+
+    /* ==========================================================================
+       5. 3D INTERACTIVE GLOBE ENGINE WITH FORGIVING HIT-TESTING
+       ========================================================================== */
+    const canvas = document.getElementById('globeCanvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('globeContainer');
+    const tooltip = document.getElementById('countryTooltip');
+    const ttCountry = document.getElementById('ttCountry');
+
+    let width = 480;
+    let height = 480;
+    let dpr = window.devicePixelRatio || 1;
+
+    let rotation = { x: 0.35, y: -2.3 };
+    let targetRotation = { x: 0.35, y: -2.3 };
+    let isDragging = false;
+    let dragDistance = 0;
+    let autoSpin = true;
+    let previousMouse = { x: 0, y: 0 };
+    let zoomLevel = 1.0;
+    let targetZoom = 1.0;
+    let hoveredCountry = null;
+
+    const CONTINENTS = [
+      [[70,-160],[65,-140],[70,-100],[60,-70],[45,-60],[30,-80],[20,-85],[15,-90],[10,-80],[20,-105],[30,-120],[50,-125],[60,-140],[70,-160]],
+      [[10,-75],[0,-50],[-10,-35],[-25,-45],[-40,-60],[-55,-70],[-45,-75],[-20,-70],[0,-80],[10,-75]],
+      [[70,25],[60,40],[50,30],[40,20],[36,-5],[45,-10],[55,5],[65,15],[70,25]],
+      [[35,-10],[37,10],[30,32],[12,45],[0,42],[-15,40],[-35,20],[-35,18],[-10,12],[5,0],[15,-15],[30,-10],[35,-10]],
+      [[75,100],[70,140],[60,170],[40,140],[30,120],[20,110],[10,105],[10,80],[25,65],[35,50],[45,50],[55,60],[65,80],[75,100]],
+      [[-12,130],[-15,145],[-25,150],[-35,145],[-38,135],[-30,115],[-20,115],[-12,130]],
+      [[44,142],[40,140],[35,135],[33,130],[31,131],[34,138],[38,142],[44,142]],
+      [[58,-5],[55,-1],[50,-1],[50,-5],[55,-7],[58,-5]]
+    ];
+
+    function resizeGlobe() {
+      const rect = container.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeGlobe);
+    resizeGlobe();
+
+    function latLonTo3D(lat, lon, radius) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      return { x, y, z };
+    }
+
+    function rotate3D(pt, rotX, rotY) {
+      const cosY = Math.cos(rotY);
+      const sinY = Math.sin(rotY);
+      const x1 = pt.x * cosY + pt.z * sinY;
+      const z1 = -pt.x * sinY + pt.z * cosY;
+
+      const cosX = Math.cos(rotX);
+      const sinX = Math.sin(rotX);
+      const y2 = pt.y * cosX - z1 * sinX;
+      const z2 = pt.y * sinX + z1 * cosX;
+
+      return { x: x1, y: y2, z: z2 };
+    }
+
+    function renderGlobe() {
+      ctx.clearRect(0, 0, width, height);
+
+      const cx = width / 2;
+      const cy = height / 2;
+      const baseRadius = (Math.min(width, height) / 2) * 0.74;
+      const radius = baseRadius * zoomLevel;
+
+      if (!isDragging) {
+        if (autoSpin) targetRotation.y += 0.002;
+        rotation.x += (targetRotation.x - rotation.x) * 0.08;
+        rotation.y += (targetRotation.y - rotation.y) * 0.08;
+      }
+      zoomLevel += (targetZoom - zoomLevel) * 0.1;
+
+      // Glow
+      const atmosGrad = ctx.createRadialGradient(cx, cy, radius * 0.85, cx, cy, radius * 1.15);
+      atmosGrad.addColorStop(0, 'rgba(162, 210, 223, 0.45)');
+      atmosGrad.addColorStop(0.5, 'rgba(156, 175, 136, 0.25)');
+      atmosGrad.addColorStop(1, 'rgba(251, 249, 245, 0)');
+      ctx.fillStyle = atmosGrad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * 1.15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Ocean
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.clip();
+
+      const oceanGrad = ctx.createRadialGradient(
+        cx - radius * 0.35, 
+        cy - radius * 0.35, 
+        radius * 0.1, 
+        cx, 
+        cy, 
+        radius
+      );
+      oceanGrad.addColorStop(0, '#CBE6F3');
+      oceanGrad.addColorStop(0.5, '#9BC6D6');
+      oceanGrad.addColorStop(0.9, '#5E8F9E');
+      oceanGrad.addColorStop(1, '#3A6370');
+      ctx.fillStyle = oceanGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Graticules
+      ctx.strokeStyle = 'rgba(245, 241, 234, 0.2)';
+      ctx.lineWidth = 1;
+      for (let lat = -60; lat <= 60; lat += 30) {
+        ctx.beginPath();
+        let first = true;
+        for (let lon = -180; lon <= 180; lon += 8) {
+          const pt3 = latLonTo3D(lat, lon, radius);
+          const rpt = rotate3D(pt3, rotation.x, rotation.y);
+          if (rpt.z > 0) {
+            const sx = cx + rpt.x;
+            const sy = cy - rpt.y;
+            if (first) { ctx.moveTo(sx, sy); first = false; }
+            else { ctx.lineTo(sx, sy); }
+          } else {
+            first = true;
+          }
+        }
+        ctx.stroke();
+      }
+
+      // Continents
+      ctx.fillStyle = '#C7B9A5';
+      ctx.strokeStyle = '#87986A';
+      ctx.lineWidth = 1.2;
+
+      CONTINENTS.forEach(poly => {
+        ctx.beginPath();
+        let drawn = false;
+        poly.forEach((coord, i) => {
+          const pt3 = latLonTo3D(coord[0], coord[1], radius);
+          const rpt = rotate3D(pt3, rotation.x, rotation.y);
+          if (rpt.z > 0) {
+            const sx = cx + rpt.x;
+            const sy = cy - rpt.y;
+            if (!drawn) { ctx.moveTo(sx, sy); drawn = true; }
+            else { ctx.lineTo(sx, sy); }
+          }
+        });
+        if (drawn) {
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+      });
+
+      // Country Pins with Generous Hit-Testing (45px)
+      let currentHover = null;
+      let closestDist = 45;
+
+      for (let name in COUNTRIES_DATA) {
+        const c = COUNTRIES_DATA[name];
+        const pt3 = latLonTo3D(c.lat, c.lon, radius);
+        const rpt = rotate3D(pt3, rotation.x, rotation.y);
+
+        if (rpt.z > 0) {
+          const sx = cx + rpt.x;
+          const sy = cy - rpt.y;
+          const isJapan = (name === "Japan");
+
+          const distToMouse = Math.hypot(previousMouse.x - sx, previousMouse.y - sy);
+          if (distToMouse < closestDist) {
+            closestDist = distToMouse;
+            currentHover = name;
+          }
+
+          const pulse = (Math.sin(Date.now() * 0.005) + 1) / 2;
+          ctx.beginPath();
+          ctx.arc(sx, sy, (isJapan ? 12 : 9) + pulse * 4, 0, Math.PI * 2);
+          ctx.strokeStyle = isJapan ? 'rgba(231, 111, 81, 0.7)' : 'rgba(45, 106, 79, 0.6)';
+          ctx.lineWidth = 1.6;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(sx, sy, isJapan ? 7 : 5.5, 0, Math.PI * 2);
+          ctx.fillStyle = isJapan ? '#E76F51' : (currentHover === name ? '#1B4332' : '#2D6A4F');
+          ctx.fill();
+          ctx.strokeStyle = '#FBF9F5';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Country Label Badge
+          ctx.font = isJapan ? 'bold 11px Plus Jakarta Sans' : '700 9.5px Plus Jakarta Sans';
+          ctx.fillStyle = isJapan ? '#771E0B' : '#0D281E';
+          ctx.fillText(`${c.flag} ${name}`, sx + 10, sy + 3);
+        }
+      }
+
+      ctx.restore();
+
+      if (currentHover !== hoveredCountry) {
+        hoveredCountry = currentHover;
+        if (hoveredCountry) {
+          const c = COUNTRIES_DATA[hoveredCountry];
+          ttCountry.textContent = `${c.flag} ${hoveredCountry}`;
+          tooltip.style.left = `${previousMouse.x}px`;
+          tooltip.style.top = `${previousMouse.y}px`;
+          tooltip.classList.add('active');
+          sound.playClick();
+        } else {
+          tooltip.classList.remove('active');
+        }
+      }
+
+      requestAnimationFrame(renderGlobe);
+    }
+    requestAnimationFrame(renderGlobe);
+
+    // Mouse & Touch Controls
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      dragDistance = 0;
+      autoSpin = false;
+      previousMouse = { x: e.offsetX, y: e.offsetY };
+      document.getElementById('spinToggleBtn').textContent = '▶';
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+
+      if (isDragging) {
+        const dx = mx - previousMouse.x;
+        const dy = my - previousMouse.y;
+        dragDistance += Math.hypot(dx, dy);
+        targetRotation.y += dx * 0.006;
+        targetRotation.x += dy * 0.006;
+        targetRotation.x = Math.max(-1.4, Math.min(1.4, targetRotation.x));
+      }
+      previousMouse = { x: mx, y: my };
+    });
+
+    // CLICKING ON THE GLOBE OPENS THE MISSION!
+    container.addEventListener('click', (e) => {
+      if (dragDistance > 6) return; // Ignore drag release
+
+      if (hoveredCountry) {
+        openCountryDossier(hoveredCountry);
+      } else {
+        // If clicked on globe without hovering on pin, find nearest visible country
+        const rect = container.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const cx = width / 2;
+        const cy = height / 2;
+        const baseRadius = (Math.min(width, height) / 2) * 0.78 * zoomLevel;
+
+        let bestName = null;
+        let minD = 9999;
+        for (let name in COUNTRIES_DATA) {
+          const c = COUNTRIES_DATA[name];
+          const pt3 = latLonTo3D(c.lat, c.lon, baseRadius);
+          const rpt = rotate3D(pt3, rotation.x, rotation.y);
+          if (rpt.z > 0) {
+            const sx = cx + rpt.x;
+            const sy = cy - rpt.y;
+            const d = Math.hypot(mx - sx, my - sy);
+            if (d < minD) {
+              minD = d;
+              bestName = name;
+            }
+          }
+        }
+        if (bestName && minD < 120) {
+          focusCountry(bestName);
+        }
+      }
+    });
+
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      targetZoom += (e.deltaY < 0 ? 0.12 : -0.12);
+      targetZoom = Math.max(0.7, Math.min(2.1, targetZoom));
+    }, { passive: false });
+
+    document.getElementById('zoomInBtn').onclick = () => { targetZoom = Math.min(2.1, targetZoom + 0.2); sound.playClick(); };
+    document.getElementById('zoomOutBtn').onclick = () => { targetZoom = Math.max(0.7, targetZoom - 0.2); sound.playClick(); };
+    document.getElementById('resetGlobeBtn').onclick = () => { targetRotation = { x: 0.35, y: -2.3 }; targetZoom = 1.0; sound.playClick(); };
+    document.getElementById('spinToggleBtn').onclick = (e) => {
+      autoSpin = !autoSpin;
+      e.target.textContent = autoSpin ? '⏸' : '▶';
+      sound.playClick();
+    };
+
+    function focusCountry(name) {
+      const c = COUNTRIES_DATA[name];
+      if (!c) return;
+      autoSpin = false;
+      document.getElementById('spinToggleBtn').textContent = '▶';
+      
+      const phi = (c.lat) * (Math.PI / 180);
+      const theta = (-c.lon - 90) * (Math.PI / 180);
+      targetRotation.x = phi;
+      targetRotation.y = theta;
+      targetZoom = 1.35;
+
+      sound.playClick();
+      setTimeout(() => openCountryDossier(name), 350);
+    }
+
+    /* ==========================================================================
+       6. COUNTRY CQ MISSION & CHALLENGE
+       ========================================================================== */
+    function openCountryDossier(name) {
+      const c = COUNTRIES_DATA[name];
+      if (!c) return;
+
+      player.recordVisit(name);
+
+      document.getElementById('dossierFlag').textContent = c.flag;
+      document.getElementById('dossierTitle').textContent = name;
+      document.getElementById('dossierBadge').textContent = c.badge;
+      
+      document.getElementById('contextMarker').style.left = `${c.contextPercent}%`;
+      const verdictText = c.contextPercent > 60 
+        ? `High-Context: Relational trust, non-verbal cues, and harmony are paramount.`
+        : (c.contextPercent < 40 
+          ? `Low-Context: Explicit words, structured documentation, and linear tasks drive decisions.`
+          : `Balanced Context: Combines formal rule of law with regional relational expectations.`);
+      document.getElementById('contextVerdict').innerHTML = `<strong>Context Score: ${c.contextPercent}%</strong> — ${verdictText}`;
+
+      document.getElementById('dossierSociocultural').innerHTML = c.sociocultural;
+      document.getElementById('dossierEtiquette').innerHTML = c.etiquette;
+      document.getElementById('dossierLegal').innerHTML = c.legal;
+      document.getElementById('dossierRegulatory').innerHTML = c.regulatory;
+      document.getElementById('dossierStrategy').innerHTML = c.strategy;
+      document.getElementById('dossierDistribution').innerHTML = c.distribution;
+      const cqEl = document.getElementById('dossierCQ'); if (cqEl) cqEl.innerHTML = `"${c.cqTip}"`;
+      const rnEl = document.getElementById('dossierRecruitmentNote'); if (rnEl) rnEl.innerHTML = c.recruitmentNote;
+
+      // STEP 1: LOAD INTERACTIVE CQ CHALLENGE
+      const quiz = c.quiz;
+      document.getElementById('quizQuestionTitle').textContent = quiz.title;
+      document.getElementById('quizScenario').textContent = quiz.scenario;
+      const optsList = document.getElementById('quizOptionsList');
+      optsList.innerHTML = '';
+
+      quiz.options.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.innerHTML = opt.text;
+        btn.onclick = () => {
+          if (btn.classList.contains('correct') || btn.classList.contains('incorrect')) return;
+          if (opt.correct) {
+            btn.classList.add('correct');
+            btn.innerHTML += `<div style="margin-top:6px; font-size:0.78rem; color:#1B4332; font-weight:700;">${opt.feedback}</div>`;
+            player.addXP(75, `Mastered ${name} Cultural Challenge`);
+          } else {
+            btn.classList.add('incorrect');
+            btn.innerHTML += `<div style="margin-top:6px; font-size:0.78rem; color:#720026; font-weight:700;">${opt.feedback}</div>`;
+            sound.playError();
+          }
+        };
+        optsList.appendChild(btn);
+      });
+
+      openModal('countryModal');
+    }
+
+    /* ==========================================================================
+       7. MATCH THE GLOBAL FACTS GAME
+       ========================================================================== */
+    const MATCH_PAIRS_POOL = [
+      { country: "Japan", fact: "High-context consensus and mandatory FSA registration under FIEA, FEFTA inward M&A screening, and Civil Code good faith (FSA 2026; Ohara 2024)." },
+      { country: "United States", fact: "Low-context explicit messaging where exhaustive written contracts rule supreme and performance is achievement-oriented (Hall; Global-IQ)." },
+      { country: "Germany", fact: "Low-context precision and Trompenaars' sequential time orientation where structured agendas and technical accuracy govern business (Umbrex)." },
+      { country: "China", fact: "High-context communitarianism and particularism where long-term relationships and mutual face preservation precede transactions (Genya 2026)." },
+      { country: "Brazil", fact: "Diffuse personal trust and affective emotional expression where personal rapport is the essential foundation for commercial partnership (Global-IQ)." },
+      { country: "India", fact: "High-context synchronic agility and ascription hierarchy where seniority is revered and teams adapt dynamically to changing variables (Umbrex)." },
+      { country: "Kenya", fact: "Communitarian mutual support and stakeholder consensus where economic ventures align with shared collective empowerment (Global-IQ)." },
+      { country: "United Arab Emirates", fact: "High-context consultative diplomacy where multi-billion dollar agreements develop through hospitality and executive trust (Changing Minds)." },
+      { country: "United Kingdom", fact: "Low-context verbal precision nuanced by polite understatement and neutral emotional restraint during financial evaluation (Umbrex)." },
+      { country: "Mexico", fact: "Diffuse boundaries and particularistic loyalty where face-to-face personal engagement resolves obstacles faster than legal confrontation (Global-IQ)." }
+    ];
+
+    let currentMatchRound = 1;
+    let selectedCountryCard = null;
+    let selectedFactCard = null;
+    let remainingPairs = 4;
+
+    function initMatchGame() {
+      currentMatchRound = 1;
+      setupMatchRound();
+      openModal('matchGameModal');
+    }
+
+    function setupMatchRound() {
+      const countryCol = document.getElementById('countryMatchCol');
+      const factCol = document.getElementById('factMatchCol');
+      const feedback = document.getElementById('matchFeedback');
+      countryCol.innerHTML = '';
+      factCol.innerHTML = '';
+      feedback.textContent = '';
+      selectedCountryCard = null;
+      selectedFactCard = null;
+
+      const shuffledPool = [...MATCH_PAIRS_POOL].sort(() => 0.5 - Math.random()).slice(0, 4);
+      remainingPairs = shuffledPool.length;
+      document.getElementById('matchRemaining').textContent = remainingPairs;
+      document.getElementById('matchRound').textContent = currentMatchRound;
+
+      const countries = shuffledPool.map(p => p.country).sort(() => 0.5 - Math.random());
+      const facts = shuffledPool.map(p => ({ country: p.country, fact: p.fact })).sort(() => 0.5 - Math.random());
+
+      countries.forEach(name => {
+        const c = COUNTRIES_DATA[name];
+        const card = document.createElement('div');
+        card.className = 'match-card';
+        card.dataset.country = name;
+        card.innerHTML = `<span style="font-size:1.4rem;">${c ? c.flag : '🌐'}</span> <strong>${name}</strong>`;
+        card.onclick = () => selectCountryCard(card);
+        countryCol.appendChild(card);
+      });
+
+      facts.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'match-card';
+        card.dataset.country = item.country;
+        card.innerHTML = `<p style="font-size:0.82rem; line-height:1.4;">${item.fact}</p>`;
+        card.onclick = () => selectFactCard(card);
+        factCol.appendChild(card);
+      });
+    }
+
+    function selectCountryCard(card) {
+      if (card.classList.contains('matched')) return;
+      document.querySelectorAll('#countryMatchCol .match-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedCountryCard = card;
+      sound.playClick();
+      checkMatchAttempt();
+    }
+
+    function selectFactCard(card) {
+      if (card.classList.contains('matched')) return;
+      document.querySelectorAll('#factMatchCol .match-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedFactCard = card;
+      sound.playClick();
+      checkMatchAttempt();
+    }
+
+    function checkMatchAttempt() {
+      if (!selectedCountryCard || !selectedFactCard) return;
+
+      const fb = document.getElementById('matchFeedback');
+      if (selectedCountryCard.dataset.country === selectedFactCard.dataset.country) {
+        selectedCountryCard.classList.remove('selected');
+        selectedFactCard.classList.remove('selected');
+        selectedCountryCard.classList.add('matched');
+        selectedFactCard.classList.add('matched');
+
+        fb.style.color = '#2D6A4F';
+        fb.textContent = `✓ Perfect Match! +50 XP for ${selectedCountryCard.dataset.country}`;
+        player.addXP(50);
+        sound.playSuccess();
+
+        remainingPairs--;
+        document.getElementById('matchRemaining').textContent = remainingPairs;
+        selectedCountryCard = null;
+        selectedFactCard = null;
+
+        if (remainingPairs === 0) {
+          fb.textContent = '🎉 Round Complete! Exceptional Global Cultural Intelligence!';
+          player.addXP(100, 'Completed Match Challenge Round');
+          setTimeout(() => {
+            currentMatchRound++;
+            if (currentMatchRound <= 3) setupMatchRound();
+            else fb.textContent = '🏆 Grand Master of Cross-Border Trade & Culture!';
+          }, 1500);
+        }
+      } else {
+        const cCard = selectedCountryCard;
+        const fCard = selectedFactCard;
+        cCard.classList.add('shake');
+        fCard.classList.add('shake');
+        fb.style.color = '#D90429';
+        fb.textContent = '✗ Mismatch! Review cultural contexts and try again.';
+        sound.playError();
+
+        setTimeout(() => {
+          cCard.classList.remove('shake', 'selected');
+          fCard.classList.remove('shake', 'selected');
+          selectedCountryCard = null;
+          selectedFactCard = null;
+        }, 500);
+      }
+    }
+
+    /* ==========================================================================
+       8. CONTEXT CLASSIFIER GAME
+       ========================================================================== */
+    const CLASSIFIER_PROMPTS = [
+      { text: "Contracts must specify every conceivable contingency and liquidated damages in binding legal clauses.", answer: "low" },
+      { text: "Prolonged silence during negotiations indicates cognitive contemplation, deep respect, and consensus deliberation.", answer: "high" },
+      { text: "Decisions depend on interpersonal relationships, background context, and situational circumstances rather than rigid universal rules (Particularism).", answer: "high" },
+      { text: "Clear, explicit verbal and written messages are prioritized to minimize misunderstandings and establish quantitative clarity.", answer: "low" },
+      { text: "Business is conducted through diffuse, long-term personal trust networks prior to introducing formal contractual demands.", answer: "high" },
+      { text: "Meetings serve primarily as formal ceremonies to ratify consensus decisions already aligned through stakeholder dialogue.", answer: "high" },
+      { text: "Commercial dispute resolution prioritizes Alternative Dispute Resolution (ADR: arbitration/mediation) over public litigation.", answer: "high" },
+      { text: "Status in corporate discussions reflects age, tenure, educational pedigree, and institutional standing (Ascription).", answer: "high" },
+      { text: "Disagreements and project critiques are communicated with immediate, blunt verbal directness to ensure operational clarity.", answer: "low" },
+      { text: "Meaning is conveyed indirectly through shared understanding, situational awareness, and nonverbal cues rather than explicit verbal declarations.", answer: "high" }
+    ];
+    let classifierIdx = 0;
+
+    function initClassifierGame() {
+      classifierIdx = 0;
+      showNextClassifierCard();
+      openModal('contextClassifierModal');
+    }
+
+    function showNextClassifierCard() {
+      const card = document.getElementById('classifierCard');
+      const fb = document.getElementById('classifierFeedback');
+      fb.textContent = '';
+      if (classifierIdx >= CLASSIFIER_PROMPTS.length) {
+        card.innerHTML = "🎉 All Prompts Classified! You have mastered Edward T. Hall's communication continuum.";
+        player.addXP(100, "Completed Context Classifier");
+        return;
+      }
+      card.textContent = `"${CLASSIFIER_PROMPTS[classifierIdx].text}"`;
+    }
+
+    function classifyPrompt(choice) {
+      if (classifierIdx >= CLASSIFIER_PROMPTS.length) return;
+      const current = CLASSIFIER_PROMPTS[classifierIdx];
+      const fb = document.getElementById('classifierFeedback');
+
+      if (choice === current.answer) {
+        fb.style.color = '#2D6A4F';
+        fb.textContent = `✓ Correct! Spot on context classification (+30 XP).`;
+        player.addXP(30);
+        sound.playSuccess();
+      } else {
+        fb.style.color = '#D90429';
+        fb.textContent = `✗ Not quite. This behavior aligns with ${current.answer.toUpperCase()}-context dynamics.`;
+        sound.playError();
+      }
+      classifierIdx++;
+      setTimeout(showNextClassifierCard, 1000);
+    }
+
+    /* ==========================================================================
+       9. MODAL BINDINGS & CONTROLS
+       ========================================================================== */
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('open');
+      sound.playClick();
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('open');
+      sound.playClick();
+    }
+    function toggleAudio() {
+      const on = sound.toggle();
+      const icon = document.getElementById('soundOnIcon');
+      if (icon) icon.style.opacity = on ? '1' : '0.3';
+    }
+
+    // Export to global window so HTML onclick always resolves
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.focusCountry = focusCountry;
+    window.initMatchGame = initMatchGame;
+    window.initClassifierGame = initClassifierGame;
+    window.toggleAudio = toggleAudio;
+    window.classifyPrompt = classifyPrompt;
+
+    // Safe Element Bindings
+    const safeClick = (id, fn) => {
+      const el = document.getElementById(id);
+      if (el) el.onclick = fn;
+    };
+
+    safeClick('heroPlayMatchBtn', initMatchGame);
+    safeClick('heroPlaySortBtn', initClassifierGame);
+    safeClick('openStoryBtn', () => openModal('learningStoryModal'));
+    // Field journal removed
+    safeClick('rankPill', () => openModal('leaderboardModal'));
+    safeClick('openMatchGameBtn', initMatchGame);
+    safeClick('openContextGameBtn', initClassifierGame);
+    // Field journal card removed
+    safeClick('openLeaderboardBtn', () => openModal('leaderboardModal'));
+    safeClick('soundToggleBtn', toggleAudio);
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+          sound.playClick();
+        }
+      });
+    });
+
+    // Set clean, thematic address bar URL
+    try {
+      if (window.location.pathname === '/' || window.location.pathname === '/index.html' || !window.location.pathname.includes('reflection-lab')) {
+        window.history.replaceState({}, document.title, '/global-environment-of-business-reflection-lab');
+      }
+    } catch (e) {}
+  </script>
+
+
+</body></html>
